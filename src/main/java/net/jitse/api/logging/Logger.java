@@ -36,12 +36,17 @@ public class Logger {
         text += ChatColor.GRAY + "[" + plugin.getName() + "] ";
 
         Bukkit.getConsoleSender().sendMessage(text + ChatColor.WHITE + message);
-        for (Player op : Bukkit.getOnlinePlayers()) {
-            if (op.isOp()) {
-                op.sendMessage(text + ChatColor.WHITE + message);
+
+        if (level == LogLevel.DEBUG) {
+            return;
+        }
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.hasPermission("phantom.logging." + level.toString().toLowerCase())) {
+                player.sendMessage(text + ChatColor.WHITE + message);
             }
         }
     }
 
-    public enum LogLevel { DEBUG, ERROR, FATAL, INFO, WARN, SUCCESS }
+    public enum LogLevel {DEBUG, ERROR, FATAL, INFO, WARN, SUCCESS}
 }

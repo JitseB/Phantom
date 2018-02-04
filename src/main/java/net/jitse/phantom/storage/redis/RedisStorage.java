@@ -34,7 +34,7 @@ public class RedisStorage implements Storage {
 
     @Override
     public boolean createStorage() {
-        Logger.log(plugin, Logger.LogLevel.INFO, "Creating Redis connection pool...");
+        Logger.log(plugin, Logger.LogLevel.DEBUG, "Creating Redis connection pool...");
         try {
             JedisPoolConfig config = new JedisPoolConfig();
             this.pool = new JedisPool(config, host, port, 10000, password, ssl);

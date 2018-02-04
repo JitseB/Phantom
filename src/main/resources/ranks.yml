@@ -6,6 +6,11 @@
 Owner:
   Operator: true
   Prefix: "&c[Owner] &f"
+  ChatFormat: "%prefix%%player_name% %message%"
+  Level: 3
+Admin:
+  Operator: true
+  Prefix: "&c[Admin] &f"
   ChatFormat: "%prefix%%player_name%&7 %message%"
   Level: 2
 Default:

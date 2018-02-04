@@ -20,7 +20,6 @@ public class Phantom extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Logger.log(this, Logger.LogLevel.INFO, "Enabling plugin...");
         this.gson = new Gson();
 
         // Load configuration files.
@@ -110,8 +109,6 @@ public class Phantom extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Logger.log(this, Logger.LogLevel.INFO, "Disabling plugin...");
-
         if (storage.isOperational()) {
             storage.stopStorage();
         }
@@ -119,7 +116,8 @@ public class Phantom extends JavaPlugin {
         if (useRedis() && redis.isOperational()) {
             redis.stopStorage();
         }
-        Logger.log(this, Logger.LogLevel.INFO, "Disabled plugin.");
+
+        Logger.log(this, Logger.LogLevel.SUCCESS, "Disabled plugin.");
     }
 
     public Gson getGson() {

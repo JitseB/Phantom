@@ -15,3 +15,9 @@ Account:
   Rank:
     Downgrade: "&cYour rank was updated to %rank_name%! A re-login is recommended."
     Upgrade: "&aYour rank was updated to %rank_name%! A re-login is recommended."
+WelcomeMessage:
+  - ""
+  - "&7Hi there %player_name%, welcome to the server!"
+  - "&7This server utilizes the open source Phantom core."
+  - "&7View on GitHub: &chttps://github.com/JitseB/phantom"
+  - ""

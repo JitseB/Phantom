@@ -6,7 +6,7 @@
 
     <groupId>net.jitse</groupId>
     <artifactId>Phantom</artifactId>
-    <version>1.0-DEV</version>
+    <version>0.0.1-dev</version>
     <properties>
         <author>JitseB</author>
         <description>The ultimate Minecraft network core.</description>

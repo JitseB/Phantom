@@ -42,7 +42,7 @@ public class HikariStorage implements Storage {
 
     @Override
     public boolean createStorage() {
-        Logger.log(plugin, Logger.LogLevel.INFO, "Creating Hikari connection pool...");
+        Logger.log(plugin, Logger.LogLevel.DEBUG, "Creating Hikari connection pool...");
         try {
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:mysql://" + host + ':' + port + '/' + database + "?useSSL=" + ssl);
