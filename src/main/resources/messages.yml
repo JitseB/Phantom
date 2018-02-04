@@ -1,0 +1,17 @@
+# Messages configuration:
+JoinMessage: "%prefix%%player_name%&r&f joined the server."
+QuitMessage: "%prefix%%player_name%&r&f left the server."
+Command:
+  Player:
+    Offline: "&cThe player you tried to find (%player_name%) is offline!"
+  NoPermission: "&cYou aren't allowed to use this command. You need the permission node &f%permission%&c."
+  Usage: "&cUsage: %syntax%"
+  Rank:
+    Invalid: "&cThe rank you entered (%argument%) is invalid!"
+  Ping:
+    Self: "&fYour ping is %color%%ping%&f."
+    Other: "&fThe ping of %player_name% is %color%%ping%&f."
+Account:
+  Rank:
+    Downgrade: "&cYour rank was updated to %rank_name%! A re-login is recommended."
+    Upgrade: "&aYour rank was updated to %rank_name%! A re-login is recommended."

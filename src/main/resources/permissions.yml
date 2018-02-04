@@ -1,0 +1,6 @@
+# Permissions configuration:
+
+# Similar to ranks.yml, can you add sections for
+# other ranks and give users permissions in the group.
+Default:
+  - "yolo"

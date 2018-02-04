@@ -1,0 +1,15 @@
+# Ranks configuration:
+
+# You can add your own ranks here (as well).
+# Permission for ranks can be added in permissions.yml.
+# "Level" defines the ranks permission level.
+Owner:
+  Operator: true
+  Prefix: "&c[Owner] &f"
+  ChatFormat: "%prefix%%player_name%&7 %message%"
+  Level: 2
+Default:
+  Operator: false
+  Prefix: "&7"
+  ChatFormat: "%prefix%%player_name% %message%"
+  Level: 1

@@ -1,0 +1,17 @@
+name: ${project.artifactId}
+version: ${project.version}
+author: ${author}
+description: ${description}
+main: ${main}
+commands:
+  rank:
+    description: Set a player's rank.
+    aliases: [setrank]
+  plugins:
+    description: Get an overview of all plugins.
+    aliases: [pl, plugin]
+  ping:
+    description: Get the ping of yourself (or someone else).
+  version:
+    description: Get the server version.
+    aliases: [ver]

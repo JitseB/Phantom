@@ -1,0 +1,31 @@
+# Settings configuration:
+
+DefaultRank: "Default"
+UseTabPrefix: true
+# If this is set to true, it'll automatically deop and op players.
+# They'll be opped and deop by looking at their rank.
+AutoOperator: true
+# See all log messages from type and all on its right.
+# Example: If type is set to DEBUG, you'll see *all* log messages (not recommended).
+# Level types: DEBUG, ERROR, FATAL, INFO, WARN and SUCCESS.
+Log:
+  Level: "FATAL"
+  LogFile: true
+
+# Modifiers for different events happening in the server.
+Modifiers:
+  World:
+    # Can add different worlds here as well.
+    # Examples for world "World" (as shown below).
+    Weather:
+      World:
+        Change: false
+        # Ony works if change is set to false.
+        # Weather types: SUN, RAIN and STORM.
+        LockTo: "SUN"
+    Time:
+      World:
+        Change: false
+        # Only works if change is set to false.
+        # Any number you'd provide in the /time command.
+        LockTo: 1700

@@ -1,0 +1,27 @@
+# Storage configuration:
+
+# Storage types: MYSQL, HIKARI, SQLITE.
+# Difference between MySql and Hikari is that
+# Hikari uses a faster connection pooling system
+# meanwhile MySql uses the default mysql connector.
+# HikariCP is the type I most recommend to use.
+Type: "HIKARI"
+
+# Login information not required for Sqlite.
+Login:
+  Host: ""
+  Port: 3306
+  User: ""
+  Password: ""
+  Database: ""
+  SSL: true
+
+# Enabling Redis will only improve performance
+# if RedisCore is running on multiple servers.
+Redis:
+  Enabled: false
+  Login:
+    Host: ""
+    Port: 6379
+    Password: ""
+    SSL: true
