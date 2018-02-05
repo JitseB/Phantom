@@ -1,4 +1,4 @@
-package net.jitse.phantom.logging;
+package net.jitse.phantom.spigot.logging;
 
 import net.jitse.phantom.spigot.Phantom;
 import org.bukkit.Bukkit;
