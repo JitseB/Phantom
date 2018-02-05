@@ -1,4 +1,4 @@
-package net.jitse.phantom.spigot.auth;
+package net.jitse.api.auth;
 
 import java.util.Random;
 
