@@ -188,8 +188,7 @@ public class MySqlStorage implements AccountStorage, AuthStorage {
             ResultSet resultSet = statement.executeQuery();
 
             if (!resultSet.next()) {
-                // Return nothing.
-                return null;
+                throw new HashNotPresentException();
             }
 
             String hash = resultSet.getString("Hash");

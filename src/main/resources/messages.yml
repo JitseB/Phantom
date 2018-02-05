@@ -23,9 +23,9 @@ WelcomeMessage:
   - ""
 ServerListMessage: "&7Sample MOTD. &cI am running Phantom!\n&fThis is another sample line."
 Auth:
-  Message: "&c%player_name%, you need to authenticate yourself (1 minute remaining)."
-  Phrase: "&cPlease enter your passphrase in chat:"
+  Message: "&c%player_name%, your ranks requires you to authenticate yourself. You have one minute to authenticate yourself before you will be kicked from the server."
+  Phrase: "&cPlease enter your phrase in chat:"
   PINTitle: "Please enter your PIN:"
   Initial:
-    Notification: "&cYour rank requires authentication! &fYou will be asked to enter this %auth_type% every time you join."
-    Code: "&aYour %auth_type% is: %code%, write it down! You will be asked to enter this shortly."
+    Message: "&cYour rank requires authentication! Phantom will generate a %auth_type% for you now..."
+    Generated: "&cYour %auth_type% is: &f%code%&c. Make sure you write it down! You will be asked to enter it every time you join."

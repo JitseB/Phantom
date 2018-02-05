@@ -209,8 +209,7 @@ public class HikariStorage implements AccountStorage, AuthStorage {
             ResultSet resultSet = statement.executeQuery();
 
             if (!resultSet.next()) {
-                // Return nothing.
-                return null;
+                throw new HashNotPresentException();
             }
 
             String hash = resultSet.getString("Hash");
@@ -236,7 +235,6 @@ public class HikariStorage implements AccountStorage, AuthStorage {
             statement.setString(1, uuid.toString());
             statement.setString(2, hash);
             statement.setString(3, hash);
-            statement.setString(4, uuid.toString());
             statement.execute();
             statement.close();
         } catch (SQLException exception) {

@@ -19,5 +19,5 @@ public class MySqlQueries {
 
     public static String AUTH_GET_FROM_UUID = "SELECT Hash FROM PhantomAuth WHERE UUID=?;";
 
-    public static String AUTH_INSERT_OR_UPDATE = "INSERT INTO PhantomAuth VALUES(?,?) ON DUPLICATE KEY UPDATE SET Hash=? WHERE UUID=?;";
+    public static String AUTH_INSERT_OR_UPDATE = "INSERT INTO PhantomAuth VALUES(?,?) ON DUPLICATE KEY UPDATE Hash=?;";
 }

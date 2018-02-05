@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class AuthManager {
 
-    private final Map<UUID, Map.Entry<AuthType, String>> active;
+    private final Map<UUID, AuthType> active;
 
     public AuthManager() {
         this.active = new HashMap<>();
@@ -19,7 +19,15 @@ public class AuthManager {
         return active.containsKey(player.getUniqueId());
     }
 
-    public Map.Entry<AuthType, String> get(Player player) {
+    public AuthType getType(Player player) {
         return active.get(player.getUniqueId());
+    }
+
+    public void add(Player player, AuthType authType) {
+        active.put(player.getUniqueId(), authType);
+    }
+
+    public void remove(Player player) {
+        active.remove(player.getUniqueId());
     }
 }

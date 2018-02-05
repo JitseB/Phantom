@@ -2,7 +2,10 @@ package net.jitse.phantom.spigot.listeners.account;
 
 import net.jitse.api.account.Account;
 import net.jitse.api.account.rank.AuthType;
+import net.jitse.api.auth.AuthGenerator;
+import net.jitse.api.auth.AuthValidator;
 import net.jitse.api.events.PlayerJoinedEvent;
+import net.jitse.api.exceptions.HashNotPresentException;
 import net.jitse.api.scoreboard.Nametag;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.BaseListener;
@@ -10,6 +13,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +24,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class PlayerJoinedListener extends BaseListener {
@@ -83,13 +88,43 @@ public class PlayerJoinedListener extends BaseListener {
 
         // If their ranks needs authentication, do it.
         if (account.getRank().getAuthentication() != AuthType.NONE) {
-            player.sendMessage(getPlugin().getMessagesConfig().getString("Auth.Message")
-                    .replace("%player_name%", player.getName()));
+            getPlugin().getAuthManager().add(player, account.getRank().getAuthentication());
 
-            if (account.getRank().getAuthentication() == AuthType.PHRASE) {
-                player.sendMessage(getPlugin().getMessagesConfig().getString("Auth.Phrase")
-                        .replace("%player_name%", player.getName()));
-            }
+            // Check whether player has an authentication hash stored.
+            Bukkit.getScheduler().runTaskAsynchronously(getPlugin(), () -> {
+                try {
+                    getPlugin().getStorage().getHashedAuthenticator(player.getUniqueId());
+
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Message")
+                            .replace("%player_name%", player.getName())));
+
+                    if (account.getRank().getAuthentication() == AuthType.PHRASE) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase")
+                                .replace("%player_name%", player.getName())));
+                    }
+                } catch (HashNotPresentException exception) {
+                    // Hash is not present -> Create new passphrase/PIN code.
+                    AuthGenerator generator = new AuthGenerator();
+                    String value = account.getRank().getAuthentication() == AuthType.PHRASE ? generator.generatePhrase() : generator.generatePIN();
+                    String hash;
+
+                    try {
+                        hash = new AuthValidator().hash(value);
+                        getPlugin().getStorage().storeHash(player.getUniqueId(), hash);
+                    } catch (NoSuchAlgorithmException algorithmException) {
+                        player.sendMessage(ChatColor.RED + "Phantom could not create a new " + account.getRank().getAuthentication().toString().toLowerCase() + " for you " +
+                                "because the algorithm was not found. Please contact an administrator.");
+                        return;
+                    }
+
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Initial.Message")
+                            .replace("%auth_type%", account.getRank().getAuthentication().toString().toLowerCase())));
+
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Initial.Generated")
+                            .replace("%auth_type%", account.getRank().getAuthentication().toString().toLowerCase())
+                            .replace("%code%", value)));
+                }
+            });
         }
     }
 

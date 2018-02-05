@@ -2,6 +2,8 @@ package net.jitse.phantom.spigot.listeners.player;
 
 import net.jitse.api.account.Account;
 import net.jitse.api.account.rank.AuthType;
+import net.jitse.api.auth.AuthValidator;
+import net.jitse.api.exceptions.HashNotPresentException;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.BaseListener;
 import net.jitse.phantom.spigot.logging.SpigotLogger;
@@ -11,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,10 +45,20 @@ public class ChatListener extends BaseListener {
 
         // If player is in authentication mode -> Cancel the event.
         if (getPlugin().getAuthManager().isAuthenticating(player)) {
-            AuthType authType = getPlugin().getAuthManager().get(player).getKey();
+            AuthType authType = getPlugin().getAuthManager().getType(player);
             if (authType == AuthType.PHRASE) {
                 getPlugin().getServer().getScheduler().runTaskAsynchronously(getPlugin(), () -> {
-//                    getPlugin().getStorage() -> Add auth methods in the Storage interface.
+                    try {
+                        String hash = getPlugin().getStorage().getHashedAuthenticator(player.getUniqueId());
+                        if (new AuthValidator().validate(hash, event.getMessage())) {
+                            player.sendMessage(ChatColor.GREEN + "Access granted. Welcome back.");
+                            getPlugin().getAuthManager().remove(player);
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Wrong phrase. Try again...");
+                        }
+                    } catch (HashNotPresentException | NoSuchAlgorithmException exception) {
+                        player.sendMessage("Todo - Exception");
+                    }
                 });
             }
             event.setCancelled(true);
