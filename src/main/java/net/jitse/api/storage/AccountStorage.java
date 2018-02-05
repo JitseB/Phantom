@@ -6,7 +6,7 @@ import net.jitse.api.exceptions.AccountFetchFailedException;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-interface AccountStorage {
+public interface AccountStorage extends Storage {
 
     /**
      * Should be ran async at any time!

@@ -3,10 +3,11 @@ package net.jitse.phantom.spigot.storage.file;
 import net.jitse.api.account.Account;
 import net.jitse.api.storage.AccountField;
 import net.jitse.api.storage.AccountStorage;
+import net.jitse.api.storage.AuthStorage;
 
 import java.util.UUID;
 
-public class SqliteStorage implements AccountStorage {
+public class SqliteStorage implements AccountStorage, AuthStorage {
 
     @Override
     public boolean createStorage() {
@@ -36,5 +37,15 @@ public class SqliteStorage implements AccountStorage {
     @Override
     public void update(UUID uuid, AccountField field, Object value) {
 
+    }
+
+    @Override
+    public String getHashedAuthenticator(UUID uuid) {
+        return null;
+    }
+
+    @Override
+    public boolean storeHash(UUID uuid, String hash) {
+        return false;
     }
 }

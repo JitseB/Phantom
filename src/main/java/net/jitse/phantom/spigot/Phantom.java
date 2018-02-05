@@ -2,7 +2,8 @@ package net.jitse.phantom.spigot;
 
 import com.google.gson.Gson;
 import net.jitse.api.configuration.Config;
-import net.jitse.api.storage.Storage;
+import net.jitse.api.storage.AccountStorage;
+import net.jitse.api.storage.AuthStorage;
 import net.jitse.api.storage.StorageType;
 import net.jitse.phantom.spigot.file.TextFiles;
 import net.jitse.phantom.spigot.logging.SpigotLogger;
@@ -13,7 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Phantom extends JavaPlugin {
 
     private Gson gson;
-    private Storage storage, redis;
+    private AuthStorage storage;
+    private AccountStorage redis;
     private Config settingsConfig, messagesConfig, permissionsConfig;
     private RanksManager ranksManager;
     private AccountManager accountManager;
@@ -126,7 +128,7 @@ public class Phantom extends JavaPlugin {
         return gson;
     }
 
-    public Storage getStorage() {
+    public AuthStorage getStorage() {
         return storage;
     }
 
@@ -134,7 +136,7 @@ public class Phantom extends JavaPlugin {
         return redis != null;
     }
 
-    public Storage getRedis() {
+    public AccountStorage getRedis() {
         return redis;
     }
 

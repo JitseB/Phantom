@@ -16,7 +16,7 @@ public enum StorageType {
         return Arrays.stream(values()).filter(type -> type.toString().equalsIgnoreCase(str)).findFirst();
     }
 
-    public Storage getStorage(Phantom plugin, Config config) {
+    public AuthStorage getStorage(Phantom plugin, Config config) {
         String host = config.getString("Login.Host");
         int port = config.getInt("Login.Port");
         String user = config.getString("Login.User");

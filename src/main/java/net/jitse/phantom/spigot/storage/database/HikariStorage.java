@@ -7,7 +7,8 @@ import net.jitse.api.account.rank.Rank;
 import net.jitse.api.exceptions.AccountFetchFailedException;
 import net.jitse.api.exceptions.HashNotPresentException;
 import net.jitse.api.storage.AccountField;
-import net.jitse.api.storage.Storage;
+import net.jitse.api.storage.AccountStorage;
+import net.jitse.api.storage.AuthStorage;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
 import net.jitse.phantom.spigot.logging.SpigotLogger;
@@ -19,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class HikariStorage implements Storage {
+public class HikariStorage implements AccountStorage, AuthStorage {
 
     private final Phantom plugin;
     private final String host, user, password, database;

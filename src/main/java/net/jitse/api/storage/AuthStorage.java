@@ -5,7 +5,7 @@ import net.jitse.api.exceptions.HashNotPresentException;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-interface AuthStorage {
+public interface AuthStorage extends AccountStorage {
 
     /**
      * Should be ran async at any time!

@@ -4,8 +4,10 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import net.jitse.api.account.Account;
 import net.jitse.api.account.rank.Rank;
 import net.jitse.api.exceptions.AccountFetchFailedException;
+import net.jitse.api.exceptions.HashNotPresentException;
 import net.jitse.api.storage.AccountField;
 import net.jitse.api.storage.AccountStorage;
+import net.jitse.api.storage.AuthStorage;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
 import net.jitse.phantom.spigot.logging.SpigotLogger;
@@ -17,7 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class MySqlStorage implements AccountStorage {
+public class MySqlStorage implements AccountStorage, AuthStorage {
 
     private final Phantom plugin;
     private final String host, user, password, database;
@@ -98,7 +100,7 @@ public class MySqlStorage implements AccountStorage {
         }
 
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(MySqlQueries.SELECT_ACCOUNT_FROM_UUID);
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.ACCOUNT_GET_FROM_UUID);
             statement.setString(1, uuid.toString());
             ResultSet resultSet = statement.executeQuery();
 
@@ -172,5 +174,54 @@ public class MySqlStorage implements AccountStorage {
         } catch (SQLException exception) {
             SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
         }
+    }
+
+    @Override
+    public String getHashedAuthenticator(UUID uuid) throws HashNotPresentException {
+        if (uuid == null) {
+            throw new IllegalArgumentException("UUID cannot be null.");
+        }
+
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.AUTH_GET_FROM_UUID);
+            statement.setString(1, uuid.toString());
+            ResultSet resultSet = statement.executeQuery();
+
+            if (!resultSet.next()) {
+                // Return nothing.
+                return null;
+            }
+
+            String hash = resultSet.getString("Hash");
+
+            resultSet.close();
+            statement.close();
+
+            return hash;
+        } catch (SQLException exception) {
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
+            throw new HashNotPresentException();
+        }
+    }
+
+    @Override
+    public boolean storeHash(UUID uuid, String hash) {
+        if (uuid == null || hash == null) {
+            throw new IllegalArgumentException("UUID or Hash cannot be null.");
+        }
+
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.AUTH_INSERT_OR_UPDATE);
+            statement.setString(1, uuid.toString());
+            statement.setString(2, hash);
+            statement.setString(3, hash);
+            statement.setString(4, uuid.toString());
+            statement.execute();
+            statement.close();
+        } catch (SQLException exception) {
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
+            return false;
+        }
+        return true;
     }
 }
