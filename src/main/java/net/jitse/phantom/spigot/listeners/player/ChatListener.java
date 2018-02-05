@@ -19,18 +19,13 @@ import java.util.regex.Pattern;
 
 public class ChatListener extends BaseListener {
 
-    private final Pattern boldPattern;
-    private final Pattern italicPattern;
-    private final Pattern underlinePattern;
-    private final Pattern strikethroughPattern;
+    private final Pattern boldPattern = Pattern.compile("\\*\\*(.*?)\\*\\*");
+    private final Pattern italicPattern = Pattern.compile("\\*(.*?)\\*");
+    private final Pattern underlinePattern = Pattern.compile("__(.*?)__");
+    private final Pattern strikethroughPattern = Pattern.compile("~~(.*?)~~");
 
     public ChatListener(Phantom plugin) {
         super(plugin);
-
-        this.boldPattern = Pattern.compile("\\*\\*(.*?)\\*\\*");
-        this.italicPattern = Pattern.compile("\\*(.*?)\\*");
-        this.underlinePattern = Pattern.compile("__(.*?)__");
-        this.strikethroughPattern = Pattern.compile("~~(.*?)~~");
     }
 
     @EventHandler

@@ -29,14 +29,11 @@ import java.util.List;
 
 public class PlayerJoinedListener extends BaseListener {
 
-    private final String gitHubLatestRelease;
-    private final JSONParser jsonParser;
+    private final String gitHubLatestRelease = "https://api.github.com/repos/JitseB/phantom/releases/latest";
+    private final JSONParser jsonParser = new JSONParser();
 
     public PlayerJoinedListener(Phantom plugin) {
         super(plugin);
-
-        this.gitHubLatestRelease = "https://api.github.com/repos/JitseB/phantom/releases/latest";
-        this.jsonParser = new JSONParser();
     }
 
     @EventHandler
