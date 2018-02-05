@@ -52,7 +52,9 @@ interface AccountStorage {
     void update(UUID uuid, AccountField field, Object value);
 
     /**
-     * See {@link AccountStorage#update(UUID, AccountField, Object)}.
+     * See {@link AccountStorage#update(UUID, AccountField, Object)} for more info.
+     *
+     * @param account The account of the player.
      */
     default void update(Account account, AccountField field, Object value) {
         update(account.getUniqueId(), field, value);

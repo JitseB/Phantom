@@ -80,7 +80,7 @@ public class MySqlStorage implements AccountStorage {
     @Override
     public boolean createPrerequisites() {
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(MySqlQueries.CREATE_PHANTOM_ACCOUNTS_TABLE);
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.ACCOUNT_CREATE_TABLE);
             statement.execute();
             statement.close();
         } catch (SQLException exception) {
@@ -133,7 +133,7 @@ public class MySqlStorage implements AccountStorage {
         }
 
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(MySqlQueries.INSERT_ACCOUNT);
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.ACCOUNT_INSERT_NEW);
             statement.setString(1, account.getUniqueId().toString());
             statement.setString(2, account.getName());
             statement.setString(3, account.getRank().getName());
@@ -165,7 +165,7 @@ public class MySqlStorage implements AccountStorage {
         }
 
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(MySqlQueries.UPDATE_VALUE.replace("%field%", field.getSqlColumn()));
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.ACCOUNT_UPDATE_FIELD.replace("%field%", field.getSqlColumn()));
             statement.setObject(1, value);
             statement.setString(2, uuid.toString());
             statement.execute();
