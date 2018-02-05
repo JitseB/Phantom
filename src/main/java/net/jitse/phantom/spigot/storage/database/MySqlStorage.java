@@ -5,7 +5,7 @@ import net.jitse.api.account.Account;
 import net.jitse.api.account.rank.Rank;
 import net.jitse.api.logging.Logger;
 import net.jitse.api.storage.AccountField;
-import net.jitse.api.storage.Storage;
+import net.jitse.api.storage.AccountStorage;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
 import net.jitse.phantom.spigot.exceptions.AccountFetchFailedException;
@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class MySqlStorage implements Storage {
+public class MySqlStorage implements AccountStorage {
 
     private final Phantom plugin;
     private final String host, user, password, database;

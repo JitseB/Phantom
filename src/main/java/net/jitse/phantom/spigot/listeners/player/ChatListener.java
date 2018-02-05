@@ -1,6 +1,7 @@
 package net.jitse.phantom.spigot.listeners.player;
 
 import net.jitse.api.account.Account;
+import net.jitse.api.account.rank.AuthType;
 import net.jitse.api.logging.Logger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.BaseListener;
@@ -35,6 +36,18 @@ public class ChatListener extends BaseListener {
 
         if (!getPlugin().getAccountManager().has(player.getUniqueId())) {
             player.sendMessage(ChatColor.RED + "Phantom didn't load your account yet, try again in a bit...");
+            event.setCancelled(true);
+            return;
+        }
+
+        // If player is in authentication mode -> Cancel the event.
+        if (getPlugin().getAuthManager().isAuthenticating(player)) {
+            AuthType authType = getPlugin().getAuthManager().get(player).getKey();
+            if (authType == AuthType.PHRASE) {
+                getPlugin().getServer().getScheduler().runTaskAsynchronously(getPlugin(), () -> {
+//                    getPlugin().getStorage() -> Add auth methods in the Storage interface.
+                });
+            }
             event.setCancelled(true);
             return;
         }

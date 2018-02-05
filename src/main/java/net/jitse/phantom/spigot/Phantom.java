@@ -17,6 +17,7 @@ public class Phantom extends JavaPlugin {
     private Config settingsConfig, messagesConfig, permissionsConfig;
     private RanksManager ranksManager;
     private AccountManager accountManager;
+    private AuthManager authManager;
 
     @Override
     public void onEnable() {
@@ -59,6 +60,7 @@ public class Phantom extends JavaPlugin {
         }
 
         this.accountManager = new AccountManager(this);
+        this.authManager = new AuthManager();
 
         // Create and test storage system.
         Logger.log(this, Logger.LogLevel.DEBUG, "Creating storage for type " + storageType.toString() + ".");
@@ -154,5 +156,9 @@ public class Phantom extends JavaPlugin {
 
     public AccountManager getAccountManager() {
         return accountManager;
+    }
+
+    public AuthManager getAuthManager() {
+        return authManager;
     }
 }

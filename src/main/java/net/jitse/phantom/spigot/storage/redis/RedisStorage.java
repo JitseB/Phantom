@@ -3,7 +3,7 @@ package net.jitse.phantom.spigot.storage.redis;
 import net.jitse.api.account.Account;
 import net.jitse.api.logging.Logger;
 import net.jitse.api.storage.AccountField;
-import net.jitse.api.storage.Storage;
+import net.jitse.api.storage.AccountStorage;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
 import redis.clients.jedis.Jedis;
@@ -12,7 +12,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.UUID;
 
-public class RedisStorage implements Storage {
+public class RedisStorage implements AccountStorage {
 
     private final Phantom plugin;
     private final String host, password;

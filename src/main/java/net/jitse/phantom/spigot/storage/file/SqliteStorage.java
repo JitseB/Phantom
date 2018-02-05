@@ -2,11 +2,11 @@ package net.jitse.phantom.spigot.storage.file;
 
 import net.jitse.api.account.Account;
 import net.jitse.api.storage.AccountField;
-import net.jitse.api.storage.Storage;
+import net.jitse.api.storage.AccountStorage;
 
 import java.util.UUID;
 
-public class SqliteStorage implements Storage {
+public class SqliteStorage implements AccountStorage {
 
     @Override
     public boolean createStorage() {
