@@ -1,10 +1,10 @@
 package net.jitse.api.storage;
 
 import net.jitse.api.configuration.Config;
-import net.jitse.phantom.Phantom;
-import net.jitse.phantom.storage.database.HikariStorage;
-import net.jitse.phantom.storage.database.MySqlStorage;
-import net.jitse.phantom.storage.file.SqliteStorage;
+import net.jitse.phantom.spigot.Phantom;
+import net.jitse.phantom.spigot.storage.database.HikariStorage;
+import net.jitse.phantom.spigot.storage.database.MySqlStorage;
+import net.jitse.phantom.spigot.storage.file.SqliteStorage;
 
 import java.util.Arrays;
 import java.util.Optional;

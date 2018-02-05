@@ -1,0 +1,5 @@
+name: ${project.artifactId}
+version: ${project.version}
+author: ${author}
+description: ${description}
+main: ${main.bungeecord}

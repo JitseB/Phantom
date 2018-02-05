@@ -1,7 +1,7 @@
 package net.jitse.api.storage;
 
 import net.jitse.api.account.Account;
-import net.jitse.phantom.exceptions.AccountFetchFailedException;
+import net.jitse.phantom.spigot.exceptions.AccountFetchFailedException;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;

@@ -2,7 +2,7 @@ name: ${project.artifactId}
 version: ${project.version}
 author: ${author}
 description: ${description}
-main: ${main}
+main: ${main.spigot}
 commands:
   rank:
     description: Set a player's rank.
