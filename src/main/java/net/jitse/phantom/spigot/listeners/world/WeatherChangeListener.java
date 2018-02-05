@@ -1,8 +1,8 @@
 package net.jitse.phantom.spigot.listeners.world;
 
-import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.BaseListener;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.weather.WeatherChangeEvent;
 

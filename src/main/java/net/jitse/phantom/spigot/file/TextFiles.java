@@ -1,7 +1,7 @@
 package net.jitse.phantom.spigot.file;
 
-import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 
 import java.io.*;
 

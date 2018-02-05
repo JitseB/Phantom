@@ -2,9 +2,9 @@ package net.jitse.phantom.spigot.listeners.player;
 
 import net.jitse.api.account.Account;
 import net.jitse.api.account.rank.AuthType;
-import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.BaseListener;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

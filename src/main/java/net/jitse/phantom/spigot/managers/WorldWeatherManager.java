@@ -1,8 +1,8 @@
 package net.jitse.phantom.spigot.managers;
 
-import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.world.WeatherChangeListener;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.bukkit.World;
 
 import java.util.Arrays;

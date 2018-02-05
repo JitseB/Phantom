@@ -2,8 +2,8 @@ package net.jitse.phantom.spigot.managers;
 
 import net.jitse.api.account.Account;
 import net.jitse.api.exceptions.AccountFetchFailedException;
-import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

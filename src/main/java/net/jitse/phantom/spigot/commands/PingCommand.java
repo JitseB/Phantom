@@ -1,8 +1,8 @@
 package net.jitse.phantom.spigot.commands;
 
 import net.jitse.api.reflections.ClassGetter;
-import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

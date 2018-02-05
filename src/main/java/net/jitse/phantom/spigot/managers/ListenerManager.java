@@ -1,6 +1,5 @@
 package net.jitse.phantom.spigot.managers;
 
-import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.account.AccountRankChangedListener;
 import net.jitse.phantom.spigot.listeners.account.PlayerJoinedListener;
@@ -10,6 +9,7 @@ import net.jitse.phantom.spigot.listeners.player.AsyncPlayerPreLoginListener;
 import net.jitse.phantom.spigot.listeners.player.ChatListener;
 import net.jitse.phantom.spigot.listeners.player.PlayerJoinListener;
 import net.jitse.phantom.spigot.listeners.world.WeatherChangeListener;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.bukkit.event.Listener;
 
 import java.util.Collections;
