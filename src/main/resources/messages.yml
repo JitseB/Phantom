@@ -22,3 +22,10 @@ WelcomeMessage:
   - "&7View on GitHub: &chttps://github.com/JitseB/phantom"
   - ""
 ServerListMessage: "&7Sample MOTD. &cI am running Phantom!\n&fThis is another sample line."
+Auth:
+  Message: "&c%player_name%, you need to authenticate yourself (1 minute remaining)."
+  Phrase: "&cPlease enter your passphrase in chat:"
+  PINTitle: "Please enter your PIN:"
+  Initial:
+    Notification: "&cYour rank requires authentication! &fYou will be asked to enter this %auth_type% every time you join."
+    Code: "&aYour %auth_type% is: %code%, write it down! You will be asked to enter this shortly."

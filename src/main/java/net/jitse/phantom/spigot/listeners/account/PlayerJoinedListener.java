@@ -83,8 +83,13 @@ public class PlayerJoinedListener extends BaseListener {
 
         // If their ranks needs authentication, do it.
         if (account.getRank().getAuthentication() != AuthType.NONE) {
-            player.sendMessage("You need to authenticate yourself.");
-            // Todo: Do the actual authentication.
+            player.sendMessage(getPlugin().getMessagesConfig().getString("Auth.Message")
+                    .replace("%player_name%", player.getName()));
+
+            if (account.getRank().getAuthentication() == AuthType.PHRASE) {
+                player.sendMessage(getPlugin().getMessagesConfig().getString("Auth.Phrase")
+                        .replace("%player_name%", player.getName()));
+            }
         }
     }
 
