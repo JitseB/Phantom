@@ -4,7 +4,7 @@ DefaultRank: "Default"
 UseTabPrefix: true
 UpdateNotifier: true
 # If this is set to true, it'll automatically deop and op players.
-# They'll be opped and deop by looking at their rank.
+# They'll be opped and de-opped by looking at their rank.
 AutoOperator: true
 MaxPlayers: 1337
 
