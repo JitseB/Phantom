@@ -5,6 +5,7 @@ import net.jitse.phantom.Phantom;
 import net.jitse.phantom.listeners.account.AccountRankChangedListener;
 import net.jitse.phantom.listeners.account.PlayerJoinedListener;
 import net.jitse.phantom.listeners.general.CommandProcessListener;
+import net.jitse.phantom.listeners.general.ServerListPingListener;
 import net.jitse.phantom.listeners.player.AsyncPlayerPreLoginListener;
 import net.jitse.phantom.listeners.player.ChatListener;
 import net.jitse.phantom.listeners.player.PlayerJoinListener;
@@ -32,7 +33,8 @@ public class ListenerManager {
                 new PlayerJoinedListener(plugin),
                 new ChatListener(plugin),
                 new AccountRankChangedListener(plugin),
-                new CommandProcessListener(plugin)
+                new CommandProcessListener(plugin),
+                new ServerListPingListener(plugin)
         );
     }
 

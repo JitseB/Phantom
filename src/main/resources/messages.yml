@@ -21,3 +21,4 @@ WelcomeMessage:
   - "&7This server utilizes the open source Phantom core."
   - "&7View on GitHub: &chttps://github.com/JitseB/phantom"
   - ""
+ServerListMessage: "&7Sample MOTD. &cI am running Phantom!\n&fThis is another sample line."

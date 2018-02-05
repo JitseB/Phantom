@@ -6,6 +6,7 @@ UpdateNotifier: true
 # If this is set to true, it'll automatically deop and op players.
 # They'll be opped and deop by looking at their rank.
 AutoOperator: true
+MaxPlayers: 1337
 
 # Modifiers for different events happening in the server.
 Modifiers:

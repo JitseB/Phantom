@@ -2,10 +2,13 @@ package net.jitse.phantom.storage.database;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import net.jitse.api.account.Account;
+import net.jitse.api.account.rank.Rank;
 import net.jitse.api.logging.Logger;
 import net.jitse.api.storage.AccountField;
 import net.jitse.api.storage.Storage;
 import net.jitse.phantom.Phantom;
+import net.jitse.phantom.account.PhantomAccount;
+import net.jitse.phantom.exceptions.AccountFetchFailedException;
 import net.jitse.phantom.util.MySqlQueries;
 
 import java.sql.Connection;
@@ -89,22 +92,85 @@ public class MySqlStorage implements Storage {
     }
 
     @Override
+    public Account getAccount(UUID uuid) throws AccountFetchFailedException {
+        if (uuid == null) {
+            throw new IllegalArgumentException("UUID cannot be null.");
+        }
+
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.SELECT_ACCOUNT_FROM_UUID);
+            statement.setString(1, uuid.toString());
+            ResultSet resultSet = statement.executeQuery();
+
+            if (!resultSet.next()) {
+                // Return nothing.
+                return null;
+            }
+
+            String name = resultSet.getString("Name");
+            String rankName = resultSet.getString("Rank");
+            Rank rank = plugin.getRanksManager().getRank(rankName).orElse(null);
+
+            resultSet.close();
+            statement.close();
+
+            if (rank == null) {
+                Logger.log(plugin, Logger.LogLevel.FATAL, name + " has a rank that doesn't exist! (Rank: " + rankName + ").");
+                throw new AccountFetchFailedException("Your rank \"" + rankName + "\" doesn't exist in our system.");
+            }
+
+            return new PhantomAccount(uuid, name, rank);
+        } catch (SQLException exception) {
+            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            throw new AccountFetchFailedException();
+        }
+    }
+
+    @Override
+    public boolean storeAccount(Account account) {
+        if (account == null) {
+            throw new IllegalArgumentException("Account cannot be null.");
+        }
+
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.INSERT_ACCOUNT);
+            statement.setString(1, account.getUniqueId().toString());
+            statement.setString(2, account.getName());
+            statement.setString(3, account.getRank().getName());
+            statement.setLong(4, System.currentTimeMillis());
+            statement.setLong(5, System.currentTimeMillis());
+            statement.setLong(6, 0);
+            statement.execute();
+            statement.close();
+        } catch (SQLException exception) {
+            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean isOperational() {
         return operational;
     }
 
     @Override
-    public Account getAccount(UUID uuid) {
-        return null;
-    }
-
-    @Override
-    public boolean storeAccount(Account account) {
-        return false;
-    }
-
-    @Override
     public void update(UUID uuid, AccountField field, Object value) {
+        if (uuid == null || field == null || value == null) {
+            throw new IllegalArgumentException("UUID, Field or Value cannot be null.");
+        }
 
+        if (!field.canSet()) {
+            throw new IllegalStateException("The specified field cannot be set.");
+        }
+
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(MySqlQueries.UPDATE_VALUE.replace("%field%", field.getSqlColumn()));
+            statement.setObject(1, value);
+            statement.setString(2, uuid.toString());
+            statement.execute();
+        } catch (SQLException exception) {
+            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+        }
     }
 }
