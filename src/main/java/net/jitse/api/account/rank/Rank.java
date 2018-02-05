@@ -11,4 +11,6 @@ public interface Rank {
     int getLevel();
 
     boolean isOperator();
+
+    AuthType getAuthentication();
 }

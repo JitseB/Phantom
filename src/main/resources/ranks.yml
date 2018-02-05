@@ -3,18 +3,24 @@
 # You can add your own ranks here (as well).
 # Permission for ranks can be added in permissions.yml.
 # "Level" defines the ranks permission level.
+#
+# Authentication can be enabled for the different ranks.
+# You can choose between the following: NONE, PIN, PHRASE.
 Owner:
   Operator: true
+  Auth: "PHRASE"
   Prefix: "&c[Owner] &f"
   ChatFormat: "%prefix%%player_name% %message%"
   Level: 3
 Admin:
   Operator: true
+  Auth: "PIN"
   Prefix: "&c[Admin] &f"
   ChatFormat: "%prefix%%player_name%&7 %message%"
   Level: 2
 Default:
   Operator: false
+  Auth: "NONE"
   Prefix: "&7"
   ChatFormat: "%prefix%%player_name% %message%"
   Level: 1

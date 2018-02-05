@@ -1,5 +1,6 @@
 package net.jitse.phantom.spigot.account.rank;
 
+import net.jitse.api.account.rank.AuthType;
 import net.jitse.api.account.rank.Rank;
 
 public class PhantomRank implements Rank {
@@ -7,13 +8,15 @@ public class PhantomRank implements Rank {
     private final String name, prefix, chatFormat;
     private final int level;
     private final boolean operator;
+    private final AuthType authType;
 
-    public PhantomRank(String name, String prefix, String chatFormat, int level, boolean operator) {
+    public PhantomRank(String name, String prefix, String chatFormat, int level, boolean operator, AuthType authType) {
         this.name = name;
         this.prefix = prefix;
         this.chatFormat = chatFormat;
         this.level = level;
         this.operator = operator;
+        this.authType = authType;
     }
 
     @Override
@@ -39,5 +42,9 @@ public class PhantomRank implements Rank {
     @Override
     public boolean isOperator() {
         return operator;
+    }
+
+    public AuthType getAuthentication() {
+        return authType;
     }
 }

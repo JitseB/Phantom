@@ -1,6 +1,7 @@
 package net.jitse.phantom.spigot.listeners.account;
 
 import net.jitse.api.account.Account;
+import net.jitse.api.account.rank.AuthType;
 import net.jitse.api.events.PlayerJoinedEvent;
 import net.jitse.api.scoreboard.Nametag;
 import net.jitse.phantom.spigot.Phantom;
@@ -78,6 +79,12 @@ public class PlayerJoinedListener extends BaseListener {
 
         for (String line : getPlugin().getMessagesConfig().getStringList("WelcomeMessage")) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', line.replace("%player_name%", player.getName())));
+        }
+
+        // If their ranks needs authentication, do it.
+        if (account.getRank().getAuthentication() != AuthType.NONE) {
+            player.sendMessage("You need to authenticate yourself.");
+            // Todo: Do the actual authentication.
         }
     }
 

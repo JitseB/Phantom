@@ -1,5 +1,6 @@
 package net.jitse.phantom.spigot.managers;
 
+import net.jitse.api.account.rank.AuthType;
 import net.jitse.api.account.rank.Rank;
 import net.jitse.api.configuration.Config;
 import net.jitse.api.logging.Logger;
@@ -34,6 +35,7 @@ public class RanksManager {
             boolean operator = ranksConfig.getBoolean(name + ".Operator");
             String prefix = ranksConfig.getString(name + ".Prefix");
             String chatFormat = ranksConfig.getString(name + ".ChatFormat");
+
             int level;
             try {
                 level = ranksConfig.getInt(name + ".Level");
@@ -43,7 +45,14 @@ public class RanksManager {
                 continue;
             }
 
-            Rank rank = new PhantomRank(name, prefix, chatFormat, level, operator);
+            AuthType authType = AuthType.byString(ranksConfig.getString(name + ".Auth")).orElse(null);
+            if (authType == null) {
+                Logger.log(plugin, Logger.LogLevel.WARN, "Tried to load rank " + name + ", but it has an invalid " +
+                        "authentication value. Skipping it...");
+                continue;
+            }
+
+            Rank rank = new PhantomRank(name, prefix, chatFormat, level, operator, authType);
             ranks.add(rank);
         }
 
