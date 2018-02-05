@@ -1,4 +1,4 @@
-package net.jitse.phantom.spigot.exceptions;
+package net.jitse.api.exceptions;
 
 public class AccountFetchFailedException extends Exception {
 

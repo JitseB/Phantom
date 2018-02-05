@@ -3,12 +3,12 @@ package net.jitse.phantom.spigot.storage.database;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import net.jitse.api.account.Account;
 import net.jitse.api.account.rank.Rank;
-import net.jitse.api.logging.Logger;
+import net.jitse.api.exceptions.AccountFetchFailedException;
 import net.jitse.api.storage.AccountField;
 import net.jitse.api.storage.AccountStorage;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
-import net.jitse.phantom.spigot.exceptions.AccountFetchFailedException;
 import net.jitse.phantom.spigot.util.MySqlQueries;
 
 import java.sql.Connection;
@@ -41,7 +41,7 @@ public class MySqlStorage implements AccountStorage {
 
     @Override
     public boolean createStorage() {
-        Logger.log(plugin, Logger.LogLevel.INFO, "Creating MySql connection pool...");
+        SpigotLogger.log(plugin, SpigotLogger.LogLevel.INFO, "Creating MySql connection pool...");
         this.dataSource = new MysqlDataSource();
         dataSource.setServerName(host);
         dataSource.setPort(port);
@@ -49,7 +49,7 @@ public class MySqlStorage implements AccountStorage {
         dataSource.setPassword(password);
         dataSource.setDatabaseName(database);
         dataSource.setUseSSL(ssl);
-        Logger.log(plugin, Logger.LogLevel.INFO, "Created MySql connection pool.");
+        SpigotLogger.log(plugin, SpigotLogger.LogLevel.INFO, "Created MySql connection pool.");
         return true;
     }
 
@@ -65,12 +65,12 @@ public class MySqlStorage implements AccountStorage {
             statement.close();
 
             if (!success) {
-                Logger.log(plugin, Logger.LogLevel.FATAL, "Could not create MySql connection pool.");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.FATAL, "Could not create MySql connection pool.");
                 return false;
             }
         } catch (SQLException exception) {
-            Logger.log(plugin, Logger.LogLevel.FATAL, "Could not create MySql connection pool.");
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.FATAL, "Could not create MySql connection pool.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             return false;
         }
         this.operational = true;
@@ -84,8 +84,8 @@ public class MySqlStorage implements AccountStorage {
             statement.execute();
             statement.close();
         } catch (SQLException exception) {
-            Logger.log(plugin, Logger.LogLevel.FATAL, "Could not create \"PhantomAccounts\" table.");
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.FATAL, "Could not create \"PhantomAccounts\" table.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             return false;
         }
         return true;
@@ -115,13 +115,13 @@ public class MySqlStorage implements AccountStorage {
             statement.close();
 
             if (rank == null) {
-                Logger.log(plugin, Logger.LogLevel.FATAL, name + " has a rank that doesn't exist! (Rank: " + rankName + ").");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.FATAL, name + " has a rank that doesn't exist! (Rank: " + rankName + ").");
                 throw new AccountFetchFailedException("Your rank \"" + rankName + "\" doesn't exist in our system.");
             }
 
             return new PhantomAccount(uuid, name, rank);
         } catch (SQLException exception) {
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             throw new AccountFetchFailedException();
         }
     }
@@ -143,7 +143,7 @@ public class MySqlStorage implements AccountStorage {
             statement.execute();
             statement.close();
         } catch (SQLException exception) {
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             return false;
         }
         return true;
@@ -170,7 +170,7 @@ public class MySqlStorage implements AccountStorage {
             statement.setString(2, uuid.toString());
             statement.execute();
         } catch (SQLException exception) {
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
         }
     }
 }

@@ -1,6 +1,6 @@
 package net.jitse.phantom.spigot.managers;
 
-import net.jitse.api.logging.Logger;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.account.AccountRankChangedListener;
 import net.jitse.phantom.spigot.listeners.account.PlayerJoinedListener;
@@ -42,6 +42,6 @@ public class ListenerManager {
         for (Listener listener : listeners) {
             plugin.getServer().getPluginManager().registerEvents(listener, plugin);
         }
-        Logger.log(plugin, Logger.LogLevel.DEBUG, "Registered a total of " + listeners.size() + " event listeners.");
+        SpigotLogger.log(plugin, SpigotLogger.LogLevel.DEBUG, "Registered a total of " + listeners.size() + " event listeners.");
     }
 }

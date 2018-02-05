@@ -1,9 +1,9 @@
 package net.jitse.phantom.spigot.managers;
 
 import net.jitse.api.account.Account;
-import net.jitse.api.logging.Logger;
+import net.jitse.api.exceptions.AccountFetchFailedException;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
-import net.jitse.phantom.spigot.exceptions.AccountFetchFailedException;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -35,7 +35,7 @@ public class AccountManager {
                         + (exception.hasMessage() ? ChatColor.WHITE + exception.getMessage() + ChatColor.RESET + "\n\n" : "")
                         + ChatColor.DARK_GRAY + "Alternatively, you can open an issue on GitHub:" + ChatColor.RESET + "\n"
                         + ChatColor.RED.toString() + ChatColor.UNDERLINE + "https://github.com/JitseB/phantom/issues" + ChatColor.RESET);
-                Logger.log(plugin, Logger.LogLevel.WARN, "Could not reload account of " + player.getName() + ".");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not reload account of " + player.getName() + ".");
             }
         }
     }

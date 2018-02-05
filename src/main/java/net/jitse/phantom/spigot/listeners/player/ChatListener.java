@@ -2,7 +2,7 @@ package net.jitse.phantom.spigot.listeners.player;
 
 import net.jitse.api.account.Account;
 import net.jitse.api.account.rank.AuthType;
-import net.jitse.api.logging.Logger;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.BaseListener;
 import org.apache.commons.lang.StringUtils;
@@ -58,7 +58,7 @@ public class ChatListener extends BaseListener {
                 .replaceFirst("%message%", "%s");
 
         if (StringUtils.countMatches(format, "%s") != 2) {
-            Logger.log(getPlugin(), Logger.LogLevel.WARN, "Couldn't parse " + player.getName() + "'s chat format. " +
+            SpigotLogger.log(getPlugin(), SpigotLogger.LogLevel.WARN, "Couldn't parse " + player.getName() + "'s chat format. " +
                     "It didn't contain the \"%user_name%\" and \"%message%\" parameters!");
             player.sendMessage(ChatColor.RED + "Phantom wasn't able to parse your chat format, please contact an administrator.");
             event.setCancelled(true);

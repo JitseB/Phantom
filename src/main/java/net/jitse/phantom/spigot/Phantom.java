@@ -2,9 +2,9 @@ package net.jitse.phantom.spigot;
 
 import com.google.gson.Gson;
 import net.jitse.api.configuration.Config;
-import net.jitse.api.logging.Logger;
 import net.jitse.api.storage.Storage;
 import net.jitse.api.storage.StorageType;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.file.TextFiles;
 import net.jitse.phantom.spigot.managers.*;
 import net.jitse.phantom.spigot.storage.redis.RedisStorage;
@@ -37,8 +37,8 @@ public class Phantom extends JavaPlugin {
         StorageType storageType = StorageType.get(storageConfig.getString("Type")).orElse(null);
         this.storage = (storageType == null ? null : storageType.getStorage(this, storageConfig));
         if (storage == null) {
-            Logger.log(this, Logger.LogLevel.FATAL, "Invalid storage type found in storage.yml.");
-            Logger.log(this, Logger.LogLevel.FATAL, "Could not boot plugin, disabling...");
+            SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Invalid storage type found in storage.yml.");
+            SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Could not boot plugin, disabling...");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -54,7 +54,7 @@ public class Phantom extends JavaPlugin {
         // Load in the ranks.
         this.ranksManager = new RanksManager(this);
         if (!ranksManager.load(ranksConfig)) {
-            Logger.log(this, Logger.LogLevel.FATAL, "Could not boot plugin, disabling...");
+            SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Could not boot plugin, disabling...");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -63,20 +63,20 @@ public class Phantom extends JavaPlugin {
         this.authManager = new AuthManager();
 
         // Create and test storage system.
-        Logger.log(this, Logger.LogLevel.DEBUG, "Creating storage for type " + storageType.toString() + ".");
+        SpigotLogger.log(this, SpigotLogger.LogLevel.DEBUG, "Creating storage for type " + storageType.toString() + ".");
         if (!storage.createStorage()) {
-            Logger.log(this, Logger.LogLevel.FATAL, "Could not boot plugin, disabling...");
+            SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Could not boot plugin, disabling...");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         getServer().getScheduler().runTaskAsynchronously(this, () -> {
             if (!storage.testStorage()) {
-                Logger.log(this, Logger.LogLevel.FATAL, "Storage failure, disabling plugin...");
+                SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Storage failure, disabling plugin...");
                 getServer().getPluginManager().disablePlugin(this);
             }
 
             if (!storage.createPrerequisites()) {
-                Logger.log(this, Logger.LogLevel.FATAL, "Storage failure, disabling plugin...");
+                SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Storage failure, disabling plugin...");
                 getServer().getPluginManager().disablePlugin(this);
             }
 
@@ -94,19 +94,19 @@ public class Phantom extends JavaPlugin {
 
             // Create and test Redis system.
             if (!redis.createStorage()) {
-                Logger.log(this, Logger.LogLevel.FATAL, "Could not boot plugin, disabling...");
+                SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Could not boot plugin, disabling...");
                 getServer().getPluginManager().disablePlugin(this);
                 return;
             }
             getServer().getScheduler().runTaskAsynchronously(this, () -> {
                 if (!redis.testStorage()) {
-                    Logger.log(this, Logger.LogLevel.FATAL, "Redis pool failure, disabling plugin...");
+                    SpigotLogger.log(this, SpigotLogger.LogLevel.FATAL, "Redis pool failure, disabling plugin...");
                     getServer().getPluginManager().disablePlugin(this);
                 }
             });
         }
 
-        Logger.log(this, Logger.LogLevel.SUCCESS, "Enabled plugin.");
+        SpigotLogger.log(this, SpigotLogger.LogLevel.SUCCESS, "Enabled plugin.");
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Phantom extends JavaPlugin {
             redis.stopStorage();
         }
 
-        Logger.log(this, Logger.LogLevel.SUCCESS, "Disabled plugin.");
+        SpigotLogger.log(this, SpigotLogger.LogLevel.SUCCESS, "Disabled plugin.");
     }
 
     public Gson getGson() {

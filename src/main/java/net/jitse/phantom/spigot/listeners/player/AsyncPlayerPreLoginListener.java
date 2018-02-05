@@ -2,10 +2,10 @@ package net.jitse.phantom.spigot.listeners.player;
 
 import net.jitse.api.account.Account;
 import net.jitse.api.events.AccountLoadedAsyncEvent;
-import net.jitse.api.logging.Logger;
+import net.jitse.api.exceptions.AccountFetchFailedException;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.DefaultPhantomAccount;
-import net.jitse.phantom.spigot.exceptions.AccountFetchFailedException;
 import net.jitse.phantom.spigot.listeners.BaseListener;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -20,7 +20,7 @@ public class AsyncPlayerPreLoginListener extends BaseListener {
     @EventHandler
     public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
         Account account = null;
-        Logger.log(getPlugin(), Logger.LogLevel.DEBUG, "Using Redis=" + getPlugin().useRedis()
+        SpigotLogger.log(getPlugin(), SpigotLogger.LogLevel.DEBUG, "Using Redis=" + getPlugin().useRedis()
                 + ", on async thread=" + event.isAsynchronous() + ".");
 
         boolean fromRedis = false;
@@ -47,7 +47,7 @@ public class AsyncPlayerPreLoginListener extends BaseListener {
                         + ChatColor.DARK_GRAY + "Alternatively, you can open an issue on GitHub:" + ChatColor.RESET + "\n"
                         + ChatColor.RED.toString() + ChatColor.UNDERLINE + "https://github.com/JitseB/phantom/issues" + ChatColor.RESET);
                 event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
-                Logger.log(getPlugin(), Logger.LogLevel.WARN, "Could not load account of " + event.getName() + ".");
+                SpigotLogger.log(getPlugin(), SpigotLogger.LogLevel.WARN, "Could not load account of " + event.getName() + ".");
             }
         }
 
@@ -58,7 +58,7 @@ public class AsyncPlayerPreLoginListener extends BaseListener {
             // Store new account in database.
             boolean success = getPlugin().getStorage().storeAccount(account);
             if (!success) {
-                Logger.log(getPlugin(), Logger.LogLevel.WARN, "Could not store " + event.getName() + "'s account in the database.");
+                SpigotLogger.log(getPlugin(), SpigotLogger.LogLevel.WARN, "Could not store " + event.getName() + "'s account in the database.");
             }
         }
 
@@ -66,7 +66,7 @@ public class AsyncPlayerPreLoginListener extends BaseListener {
         if (!fromRedis && getPlugin().useRedis()) {
             boolean success = getPlugin().getStorage().storeAccount(account);
             if (!success) {
-                Logger.log(getPlugin(), Logger.LogLevel.WARN, "Could not store " + event.getName() + "'s account in the Redis server.");
+                SpigotLogger.log(getPlugin(), SpigotLogger.LogLevel.WARN, "Could not store " + event.getName() + "'s account in the Redis server.");
             }
         }
 

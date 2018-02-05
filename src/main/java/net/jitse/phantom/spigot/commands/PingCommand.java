@@ -1,7 +1,7 @@
 package net.jitse.phantom.spigot.commands;
 
-import net.jitse.api.logging.Logger;
 import net.jitse.api.reflections.ClassGetter;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -27,7 +27,7 @@ public class PingCommand implements CommandExecutor {
         this.entityPlayerClazz = ClassGetter.getNMSClass("EntityPlayer");
 
         if (craftPlayerClazz == null || entityPlayerClazz == null) {
-            Logger.log(plugin, Logger.LogLevel.WARN, "Could not get CraftPlayer and/or EntityPlayer classes, disabling ping command.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not get CraftPlayer and/or EntityPlayer classes, disabling ping command.");
             this.failed = true;
         } else {
             this.failed = false;
@@ -86,7 +86,7 @@ public class PingCommand implements CommandExecutor {
             Field pingField = entityPlayerClazz.getField("ping");
             ping = (int) pingField.get(entityPlayer);
         } catch (Exception exception) {
-            Logger.log(plugin, Logger.LogLevel.ERROR, "Could not get ping of " + player.getName() + ". Message: " + exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not get ping of " + player.getName() + ". Message: " + exception.getMessage());
         }
         return ping;
     }

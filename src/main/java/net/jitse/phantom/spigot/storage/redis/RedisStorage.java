@@ -1,9 +1,9 @@
 package net.jitse.phantom.spigot.storage.redis;
 
 import net.jitse.api.account.Account;
-import net.jitse.api.logging.Logger;
 import net.jitse.api.storage.AccountField;
 import net.jitse.api.storage.AccountStorage;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
 import redis.clients.jedis.Jedis;
@@ -34,17 +34,17 @@ public class RedisStorage implements AccountStorage {
 
     @Override
     public boolean createStorage() {
-        Logger.log(plugin, Logger.LogLevel.DEBUG, "Creating Redis connection pool...");
+        SpigotLogger.log(plugin, SpigotLogger.LogLevel.DEBUG, "Creating Redis connection pool...");
         try {
             JedisPoolConfig config = new JedisPoolConfig();
             this.pool = new JedisPool(config, host, port, 10000, password, ssl);
         } catch (Exception exception) {
-            Logger.log(plugin, Logger.LogLevel.FATAL, "Could not create Redis connection pool.");
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.FATAL, "Could not create Redis connection pool.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             return false;
         }
 
-        Logger.log(plugin, Logger.LogLevel.INFO, "Created Redis connection pool.");
+        SpigotLogger.log(plugin, SpigotLogger.LogLevel.INFO, "Created Redis connection pool.");
         return true;
     }
 
@@ -53,8 +53,8 @@ public class RedisStorage implements AccountStorage {
         try (Jedis connection = pool.getResource()) {
             connection.ping();
         } catch (Exception exception) {
-            Logger.log(plugin, Logger.LogLevel.FATAL, "Could not create Redis connection pool.");
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.FATAL, "Could not create Redis connection pool.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             return false;
         }
         this.operational = true;
@@ -64,7 +64,7 @@ public class RedisStorage implements AccountStorage {
     @Override
     public void stopStorage() {
         pool.close();
-        Logger.log(plugin, Logger.LogLevel.INFO, "Closed Redis connection pool.");
+        SpigotLogger.log(plugin, SpigotLogger.LogLevel.INFO, "Closed Redis connection pool.");
     }
 
     @Override
@@ -76,7 +76,7 @@ public class RedisStorage implements AccountStorage {
                 return null;
             }
 
-            Logger.log(plugin, Logger.LogLevel.DEBUG, "Successfully grabbed account from Redis server.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.DEBUG, "Successfully grabbed account from Redis server.");
             return plugin.getGson().fromJson(json, PhantomAccount.class);
         } catch (Exception exception) {
             return null;
@@ -88,7 +88,7 @@ public class RedisStorage implements AccountStorage {
         try (Jedis connection = pool.getResource()) {
             String json = plugin.getGson().toJson(account);
             connection.set(account.getUniqueId().toString(), json);
-            Logger.log(plugin, Logger.LogLevel.DEBUG, "Successfully stored " + account.getName() + "'s account in the Redis server.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.DEBUG, "Successfully stored " + account.getName() + "'s account in the Redis server.");
         } catch (Exception exception) {
             return false;
         }
@@ -125,9 +125,9 @@ public class RedisStorage implements AccountStorage {
 
             String json = plugin.getGson().toJson(account);
             connection.set(account.getUniqueId().toString(), json);
-            Logger.log(plugin, Logger.LogLevel.DEBUG, "Successfully updated " + account.getName() + "'s account in the Redis server.");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.DEBUG, "Successfully updated " + account.getName() + "'s account in the Redis server.");
         } catch (Exception exception) {
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
         }
     }
 }

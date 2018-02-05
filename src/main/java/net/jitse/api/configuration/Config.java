@@ -1,6 +1,6 @@
 package net.jitse.api.configuration;
 
-import net.jitse.api.logging.Logger;
+import net.jitse.phantom.logging.SpigotLogger;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -41,16 +41,16 @@ public class Config extends YamlConfiguration {
                     save();
                 }
             } catch (IOException | InvalidConfigurationException exception) {
-                Logger.log(plugin, Logger.LogLevel.WARN, "Could not create config file " + file.getName() + ".");
-                Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not create config file " + file.getName() + ".");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             }
         }
 
         try {
             load(file);
         } catch (IOException | InvalidConfigurationException exception) {
-            Logger.log(plugin, Logger.LogLevel.WARN, "Could not load config file " + file.getName() + ".");
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not load config file " + file.getName() + ".");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
         }
     }
 
@@ -59,8 +59,8 @@ public class Config extends YamlConfiguration {
             options().indent(2);
             save(file);
         } catch (IOException exception) {
-            Logger.log(plugin, Logger.LogLevel.WARN, "Could not save config file " + file.getName() + ".");
-            Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not save config file " + file.getName() + ".");
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
         }
     }
 }

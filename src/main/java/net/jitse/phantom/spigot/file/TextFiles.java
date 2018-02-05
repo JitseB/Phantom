@@ -1,6 +1,6 @@
 package net.jitse.phantom.spigot.file;
 
-import net.jitse.api.logging.Logger;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 
 import java.io.*;
@@ -33,8 +33,8 @@ public class TextFiles {
                     exception.printStackTrace();
                 }
             } catch (IOException exception) {
-                Logger.log(plugin, Logger.LogLevel.WARN, "Could not create thank you file.");
-                Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not create thank you file.");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             }
         }
 
@@ -55,8 +55,8 @@ public class TextFiles {
                     exception.printStackTrace();
                 }
             } catch (IOException exception) {
-                Logger.log(plugin, Logger.LogLevel.WARN, "Could not create copyright file.");
-                Logger.log(plugin, Logger.LogLevel.ERROR, exception.getMessage());
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not create copyright file.");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
             }
         }
     }

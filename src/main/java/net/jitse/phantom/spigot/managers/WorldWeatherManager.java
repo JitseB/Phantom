@@ -1,6 +1,6 @@
 package net.jitse.phantom.spigot.managers;
 
-import net.jitse.api.logging.Logger;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.world.WeatherChangeListener;
 import org.bukkit.World;
@@ -21,7 +21,7 @@ public class WorldWeatherManager {
         for (String name : keys) {
             World world = plugin.getServer().getWorld(name);
             if (world == null) {
-                Logger.log(plugin, Logger.LogLevel.WARN, "Failed to lock weather for world " + name + ", is it loaded?");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Failed to lock weather for world " + name + ", is it loaded?");
                 continue;
             }
 
@@ -31,13 +31,13 @@ public class WorldWeatherManager {
                     .filter(type -> type.toString().equalsIgnoreCase(config)).findFirst().orElse(null);
 
             if (weather == null) {
-                Logger.log(plugin, Logger.LogLevel.WARN, "Check the settings.yml file. The weather lock type for world " + name + " is incorrect.");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Check the settings.yml file. The weather lock type for world " + name + " is incorrect.");
             } else {
                 world.setGameRuleValue("doWeatherCycle", String.valueOf(change));
                 if (!change) {
                     world.setStorm(weather == WeatherChangeListener.WeatherType.RAIN || weather == WeatherChangeListener.WeatherType.STORM);
                     world.setThundering(weather == WeatherChangeListener.WeatherType.STORM);
-                    Logger.log(plugin, Logger.LogLevel.DEBUG, "Locked weather for world " + name + " to " + weather.toString() + ".");
+                    SpigotLogger.log(plugin, SpigotLogger.LogLevel.DEBUG, "Locked weather for world " + name + " to " + weather.toString() + ".");
                 }
             }
         }

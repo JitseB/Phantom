@@ -1,12 +1,12 @@
 package net.jitse.api.storage;
 
 import net.jitse.api.account.Account;
-import net.jitse.phantom.spigot.exceptions.AccountFetchFailedException;
+import net.jitse.api.exceptions.AccountFetchFailedException;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-public interface AccountStorage extends Storage {
+interface AccountStorage {
 
     /**
      * Should be ran async at any time!
@@ -42,8 +42,18 @@ public interface AccountStorage extends Storage {
      */
     boolean storeAccount(Account account);
 
+    /**
+     * Update a value permanently for a player's account.
+     *
+     * @param uuid  The UUID of the player.
+     * @param field The account field you'd like to update.
+     * @param value The new value for this account field.
+     */
     void update(UUID uuid, AccountField field, Object value);
 
+    /**
+     * See {@link AccountStorage#update(UUID, AccountField, Object)}.
+     */
     default void update(Account account, AccountField field, Object value) {
         update(account.getUniqueId(), field, value);
     }

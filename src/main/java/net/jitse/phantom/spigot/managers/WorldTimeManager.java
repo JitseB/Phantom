@@ -1,6 +1,6 @@
 package net.jitse.phantom.spigot.managers;
 
-import net.jitse.api.logging.Logger;
+import net.jitse.phantom.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import org.bukkit.World;
 
@@ -19,7 +19,7 @@ public class WorldTimeManager {
         for (String name : keys) {
             World world = plugin.getServer().getWorld(name);
             if (world == null) {
-                Logger.log(plugin, Logger.LogLevel.WARN, "Failed to lock time for world " + name + ", is it loaded?");
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Failed to lock time for world " + name + ", is it loaded?");
                 continue;
             }
             boolean change = plugin.getSettingsConfig().getBoolean("Modifiers.World.Time." + name + ".Change");
@@ -28,9 +28,9 @@ public class WorldTimeManager {
                 try {
                     int time = plugin.getSettingsConfig().getInt("Modifiers.World.Time." + name + ".LockTo");
                     world.setTime(time);
-                    Logger.log(plugin, Logger.LogLevel.DEBUG, "Locked time for world " + name + " to " + time + ".");
+                    SpigotLogger.log(plugin, SpigotLogger.LogLevel.DEBUG, "Locked time for world " + name + " to " + time + ".");
                 } catch (NumberFormatException exception) {
-                    Logger.log(plugin, Logger.LogLevel.WARN, "Failed to lock time for world " + name + ", because" +
+                    SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Failed to lock time for world " + name + ", because" +
                             " the time could not be parsed.");
                 }
             }

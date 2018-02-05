@@ -1,6 +1,6 @@
 package net.jitse.api.storage;
 
-public interface Storage {
+public interface Storage extends AccountStorage, AuthStorage {
 
     /**
      * @return Whether the storage system could be set up correctly.

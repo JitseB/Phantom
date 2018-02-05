@@ -1,13 +1,13 @@
-package net.jitse.api.logging;
+package net.jitse.phantom.logging;
 
+import net.jitse.phantom.spigot.Phantom;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class Logger {
+public class SpigotLogger {
 
-    public static void log(JavaPlugin plugin, LogLevel level, String message) {
+    public static void log(Phantom plugin, LogLevel level, String message) {
         String text;
         switch (level) {
             case DEBUG:
