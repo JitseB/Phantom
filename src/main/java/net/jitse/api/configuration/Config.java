@@ -1,6 +1,6 @@
 package net.jitse.api.configuration;
 
-import net.jitse.phantom.logging.SpigotLogger;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -3,7 +3,7 @@ package net.jitse.phantom.spigot.managers;
 import net.jitse.api.account.rank.AuthType;
 import net.jitse.api.account.rank.Rank;
 import net.jitse.api.configuration.Config;
-import net.jitse.phantom.logging.SpigotLogger;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.rank.PhantomRank;
 

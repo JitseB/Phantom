@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import net.jitse.api.configuration.Config;
 import net.jitse.api.storage.Storage;
 import net.jitse.api.storage.StorageType;
-import net.jitse.phantom.logging.SpigotLogger;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.file.TextFiles;
 import net.jitse.phantom.spigot.managers.*;
 import net.jitse.phantom.spigot.storage.redis.RedisStorage;

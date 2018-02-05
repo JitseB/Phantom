@@ -3,7 +3,7 @@ package net.jitse.phantom.spigot.listeners.player;
 import net.jitse.api.account.Account;
 import net.jitse.api.events.AccountLoadedAsyncEvent;
 import net.jitse.api.exceptions.AccountFetchFailedException;
-import net.jitse.phantom.logging.SpigotLogger;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.DefaultPhantomAccount;
 import net.jitse.phantom.spigot.listeners.BaseListener;

@@ -3,7 +3,7 @@ package net.jitse.phantom.spigot.storage.redis;
 import net.jitse.api.account.Account;
 import net.jitse.api.storage.AccountField;
 import net.jitse.api.storage.AccountStorage;
-import net.jitse.phantom.logging.SpigotLogger;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
 import redis.clients.jedis.Jedis;

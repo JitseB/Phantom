@@ -1,6 +1,6 @@
 package net.jitse.phantom.spigot.listeners.world;
 
-import net.jitse.phantom.logging.SpigotLogger;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.listeners.BaseListener;
 import org.bukkit.event.EventHandler;

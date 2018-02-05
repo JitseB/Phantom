@@ -6,7 +6,7 @@ import net.jitse.api.account.rank.Rank;
 import net.jitse.api.exceptions.AccountFetchFailedException;
 import net.jitse.api.storage.AccountField;
 import net.jitse.api.storage.AccountStorage;
-import net.jitse.phantom.logging.SpigotLogger;
+import net.jitse.phantom.spigot.logging.SpigotLogger;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.account.PhantomAccount;
 import net.jitse.phantom.spigot.util.MySqlQueries;
