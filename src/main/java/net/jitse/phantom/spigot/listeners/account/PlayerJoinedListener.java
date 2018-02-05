@@ -120,6 +120,9 @@ public class PlayerJoinedListener extends BaseListener {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Initial.Generated")
                             .replace("%auth_type%", account.getRank().getAuthentication().toString().toLowerCase())
                             .replace("%code%", value)));
+
+                    // Remove so they aren't asked unexpectedly.
+                    getPlugin().getAuthManager().remove(player);
                 }
             });
         }
