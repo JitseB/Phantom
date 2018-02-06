@@ -84,7 +84,7 @@ public class ChatListener extends BaseListener {
         event.setFormat(format);
     }
 
-    // Todo: Clean up this mess.
+    // TODO Clean up this mess.
     private String markup(String input, String lastColors) {
         StringBuffer buffer = new StringBuffer(input.length());
 
