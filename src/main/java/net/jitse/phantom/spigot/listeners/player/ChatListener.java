@@ -46,13 +46,13 @@ public class ChatListener extends BaseListener {
                     try {
                         String hash = getPlugin().getStorage().getHashedAuthenticator(player.getUniqueId());
                         if (new AuthValidator().validate(hash, event.getMessage())) {
-                            player.sendMessage(ChatColor.GREEN + "Access granted. Welcome back.");
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase.Valid")));
                             getPlugin().getAuthManager().remove(player);
                         } else {
-                            player.sendMessage(ChatColor.RED + "Wrong phrase. Try again...");
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase.Wrong")));
                         }
                     } catch (HashNotPresentException | NoSuchAlgorithmException exception) {
-                        player.sendMessage("Todo - Exception");
+                        player.sendMessage(ChatColor.RED + "Something went wrong while validating your password. Please contact a server administrator.");
                     }
                 });
             }

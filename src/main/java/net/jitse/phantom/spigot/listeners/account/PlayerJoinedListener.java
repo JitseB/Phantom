@@ -90,14 +90,16 @@ public class PlayerJoinedListener extends BaseListener {
             // Check whether player has an authentication hash stored.
             Bukkit.getScheduler().runTaskAsynchronously(getPlugin(), () -> {
                 try {
-                    getPlugin().getStorage().getHashedAuthenticator(player.getUniqueId());
+                    getPlugin().getStorage().getHashedAuthenticator(player.getUniqueId()); // This will throw HashNotPresentException.
 
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Message")
                             .replace("%player_name%", player.getName())));
 
                     if (account.getRank().getAuthentication() == AuthType.PHRASE) {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase")
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase.Question")
                                 .replace("%player_name%", player.getName())));
+                    } else {
+                        // TODO Open PIN code GUI.
                     }
                 } catch (HashNotPresentException exception) {
                     // Hash is not present -> Create new passphrase/PIN code.
@@ -121,7 +123,7 @@ public class PlayerJoinedListener extends BaseListener {
                             .replace("%auth_type%", account.getRank().getAuthentication().toString().toLowerCase())
                             .replace("%code%", value)));
 
-                    // Remove so they aren't asked unexpectedly.
+                    // Remove so they aren't asked the first time.
                     getPlugin().getAuthManager().remove(player);
                 }
             });

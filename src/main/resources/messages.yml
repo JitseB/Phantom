@@ -24,7 +24,10 @@ WelcomeMessage:
 ServerListMessage: "&7Sample MOTD. &cI am running Phantom!\n&fThis is another sample line."
 Auth:
   Message: "&c%player_name%, your ranks requires you to authenticate yourself. You have one minute to authenticate yourself before you will be kicked from the server."
-  Phrase: "&cPlease enter your phrase in chat:"
+  Phrase:
+    Question: "&cPlease enter your phrase in chat:"
+    Wrong: "&cWrong phrase. Try again..."
+    Valid: "&aAccess granted! Welcome back."
   PINTitle: "Please enter your PIN:"
   Initial:
     Message: "&cYour rank requires authentication! Phantom will generate a %auth_type% for you now..."
