@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,10 +45,17 @@ public class ChatListener extends BaseListener {
             if (authType == AuthType.PHRASE) {
                 getPlugin().getServer().getScheduler().runTaskAsynchronously(getPlugin(), () -> {
                     try {
+                        UUID uuid = player.getUniqueId();
                         String hash = getPlugin().getStorage().getHashedAuthenticator(player.getUniqueId());
+
+                        // Fail-safe.
+                        if (!player.isOnline()) {
+                            return;
+                        }
+
                         if (new AuthValidator().validate(hash, event.getMessage())) {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase.Valid")));
-                            getPlugin().getAuthManager().remove(player);
+                            getPlugin().getAuthManager().remove(uuid);
                         } else {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase.Wrong")));
                         }

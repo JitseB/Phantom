@@ -23,11 +23,18 @@ public class AuthManager {
         return active.get(player.getUniqueId());
     }
 
-    public void add(Player player, AuthType authType) {
-        active.put(player.getUniqueId(), authType);
+    public void add(UUID uuid, AuthType authType) {
+        active.put(uuid, authType);
     }
 
-    public void remove(Player player) {
-        active.remove(player.getUniqueId());
+    public void remove(UUID uuid) {
+        active.remove(uuid);
+    }
+
+    public void removeSafe(UUID uuid) {
+        if (!active.containsKey(uuid)) {
+            return;
+        }
+        active.remove(uuid);
     }
 }

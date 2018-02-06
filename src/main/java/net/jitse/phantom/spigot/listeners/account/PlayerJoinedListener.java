@@ -26,6 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.UUID;
 
 public class PlayerJoinedListener extends BaseListener {
 
@@ -85,23 +86,49 @@ public class PlayerJoinedListener extends BaseListener {
 
         // If their ranks needs authentication, do it.
         if (account.getRank().getAuthentication() != AuthType.NONE) {
-            getPlugin().getAuthManager().add(player, account.getRank().getAuthentication());
+            UUID uuid = player.getUniqueId();
+            String name = player.getName();
+
+            getPlugin().getAuthManager().add(uuid, account.getRank().getAuthentication());
 
             // Check whether player has an authentication hash stored.
             Bukkit.getScheduler().runTaskAsynchronously(getPlugin(), () -> {
                 try {
-                    getPlugin().getStorage().getHashedAuthenticator(player.getUniqueId()); // This will throw HashNotPresentException.
+                    getPlugin().getStorage().getHashedAuthenticator(uuid); // This will throw HashNotPresentException [IO process].
+
+                    // If player is not present anymore -> Cancel.
+                    if (!player.isOnline()) {
+                        return;
+                    }
 
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Message")
-                            .replace("%player_name%", player.getName())));
+                            .replace("%player_name%", name)));
 
                     if (account.getRank().getAuthentication() == AuthType.PHRASE) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.Phrase.Question")
-                                .replace("%player_name%", player.getName())));
+                                .replace("%player_name%", name)));
                     } else {
-                        // TODO Open PIN code GUI.
+                        // TODO Open PIN code GUI [sync].
                     }
+
+                    // Kick scheduler.
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(getPlugin(), () -> {
+                        if (player.isOnline()) {
+                            Bukkit.getScheduler().runTask(getPlugin(), () -> {
+                                player.kickPlayer(ChatColor.translateAlternateColorCodes('&', getPlugin().getMessagesConfig().getString("Auth.FailedKick")
+                                        .replace("%player_name%", name)));
+                            });
+                        }
+
+                        // Remove from the auth list anyway.
+                        getPlugin().getAuthManager().removeSafe(uuid);
+                    }, 20 * 60);
                 } catch (HashNotPresentException exception) {
+                    // If player is not present anymore -> Cancel.
+                    if (!player.isOnline()) {
+                        return;
+                    }
+
                     // Hash is not present -> Create new passphrase/PIN code.
                     AuthGenerator generator = new AuthGenerator();
                     String value = account.getRank().getAuthentication() == AuthType.PHRASE ? generator.generatePhrase() : generator.generatePIN();
@@ -109,7 +136,7 @@ public class PlayerJoinedListener extends BaseListener {
 
                     try {
                         hash = new AuthValidator().hash(value);
-                        getPlugin().getStorage().storeHash(player.getUniqueId(), hash);
+                        getPlugin().getStorage().storeHash(uuid, hash);
                     } catch (NoSuchAlgorithmException algorithmException) {
                         player.sendMessage(ChatColor.RED + "Phantom could not create a new " + account.getRank().getAuthentication().toString().toLowerCase() + " for you " +
                                 "because the algorithm was not found. Please contact an administrator.");
@@ -124,7 +151,7 @@ public class PlayerJoinedListener extends BaseListener {
                             .replace("%code%", value)));
 
                     // Remove so they aren't asked the first time.
-                    getPlugin().getAuthManager().remove(player);
+                    getPlugin().getAuthManager().remove(uuid);
                 }
             });
         }
