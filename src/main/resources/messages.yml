@@ -25,6 +25,7 @@ ServerListMessage: "&7Sample MOTD. &cI am running Phantom!\n&fThis is another sa
 Auth:
   Message: "&c%player_name%, your ranks requires you to authenticate yourself. You have one minute to authenticate yourself before you will be kicked from the server."
   FailedKick: "&c%player_name%, you were kicked because you failed to&r\n&cauthenticate yourself in time!&r\n\n&cThis has been logged in our database."
+  MoveBlock: "&cPlease authenticate yourself!"
   Phrase:
     Question: "&cPlease enter your phrase in chat:"
     Wrong: "&cWrong phrase. Try again..."

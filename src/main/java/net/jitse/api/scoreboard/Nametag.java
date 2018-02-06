@@ -52,9 +52,13 @@ public class Nametag {
         Team team = scoreboard.getTeam(name);
         if (team == null) {
             team = scoreboard.registerNewTeam(name);
+
+            // Stop collision.
+            // TODO Config option?
+            team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
         }
         return team;
     }
 
-    public enum NametagType { PREFIX, SUFFIX, BOTH }
+    public enum NametagType {PREFIX, SUFFIX, BOTH}
 }

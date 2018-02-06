@@ -8,6 +8,7 @@ import net.jitse.phantom.spigot.listeners.general.ServerListPingListener;
 import net.jitse.phantom.spigot.listeners.player.AsyncPlayerPreLoginListener;
 import net.jitse.phantom.spigot.listeners.player.ChatListener;
 import net.jitse.phantom.spigot.listeners.player.PlayerJoinListener;
+import net.jitse.phantom.spigot.listeners.player.PlayerMoveListener;
 import net.jitse.phantom.spigot.listeners.world.WeatherChangeListener;
 import net.jitse.phantom.spigot.logging.SpigotLogger;
 import org.bukkit.event.Listener;
@@ -34,7 +35,8 @@ public class ListenerManager {
                 new ChatListener(plugin),
                 new AccountRankChangedListener(plugin),
                 new CommandProcessListener(plugin),
-                new ServerListPingListener(plugin)
+                new ServerListPingListener(plugin),
+                new PlayerMoveListener(plugin)
         );
     }
 
