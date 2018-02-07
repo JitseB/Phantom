@@ -41,7 +41,42 @@ If you would like to be added to (or removed from) this list, please do not hesi
 
 If you have any features you would to see added to Phantom, (you might have guessed it) send me an [email](mailto:Jitse@fastmail.com)! :smile:
 
-## API
+## Developers
+### Dependency Management
+* This project supports Maven and Gradle. Other dependency managers may hook into the Maven repository as well.
+
+#### Maven
+```xml
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+  
+  	<dependency>
+	    <groupId>com.github.JitseB</groupId>
+	    <artifactId>phantom</artifactId>
+	    <version>LATEST_RELEASE</version>
+	</dependency>
+```
+#### Gradle
+```gradle
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+  
+  	dependencies {
+		compile 'com.github.JitseB:phantom:LATEST_RELEASE'
+	}
+```
+* Replace "LATEST_RELEASE" with the actual latest release: [![Release](https://jitpack.io/v/JitseB/phantom.svg)](https://jitpack.io/#JitseB/phantom)
+* *If you do not use Maven or Gradle, you may download the latest [release](https://github.com/JitseB/phantom/releases) and add it to your build path.*
+
+### API Example
 `To be written later...`
 
 ## Acknowledgements
