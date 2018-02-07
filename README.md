@@ -81,4 +81,4 @@ Replace "LATEST_RELEASE" with the actual latest release: [![Release](https://jit
 `To be written later...`
 
 ## Acknowledgements
-*We thank all those who have [contributed](https://github.com/JitseB/phantom/graphs/contributors) to the creation of what Phantom is today.*
+We thank all those who have [contributed](https://github.com/JitseB/phantom/graphs/contributors) to the creation of what Phantom is today.
