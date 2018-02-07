@@ -45,4 +45,4 @@ If you have any features you would to see added to Phantom, (you might have gues
 `To be written later...`
 
 ## Acknowledgements
-*We thank all those who have [contributed](https://github.com/project-budder/PbPerms/graphs/contributors) to the creation of what Phantom is today.*
+*We thank all those who have [contributed](https://github.com/JitseB/phantom/graphs/contributors) to the creation of what Phantom is today.*
