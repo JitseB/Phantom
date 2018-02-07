@@ -43,7 +43,7 @@ If you have any features you would to see added to Phantom, (you might have gues
 
 ## Developers
 ### Dependency Management
-* This project supports Maven and Gradle. Other dependency managers may hook into the Maven repository as well.
+This project supports Maven and Gradle. Other dependency managers may hook into the Maven repository as well.
 
 #### Maven
 ```xml
@@ -73,8 +73,8 @@ If you have any features you would to see added to Phantom, (you might have gues
 		compile 'com.github.JitseB:phantom:LATEST_RELEASE'
 	}
 ```
-* Replace "LATEST_RELEASE" with the actual latest release: [![Release](https://jitpack.io/v/JitseB/phantom.svg)](https://jitpack.io/#JitseB/phantom)
-* *If you do not use Maven or Gradle, you may download the latest [release](https://github.com/JitseB/phantom/releases) and add it to your build path.*
+Replace "LATEST_RELEASE" with the actual latest release: [![Release](https://jitpack.io/v/JitseB/phantom.svg)](https://jitpack.io/#JitseB/phantom)
+*If you do not use Maven or Gradle, you may download the latest [release](https://github.com/JitseB/phantom/releases) and add it to your build path.*
 
 ### API Example
 `To be written later...`
