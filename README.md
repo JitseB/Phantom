@@ -73,7 +73,7 @@ This project supports Maven and Gradle. Other dependency managers may hook into 
 		compile 'com.github.JitseB:phantom:LATEST_RELEASE'
 	}
 ```
-Replace "LATEST_RELEASE" with the actual latest release: [![Release](https://jitpack.io/v/JitseB/phantom.svg)](https://jitpack.io/#JitseB/phantom)
+Replace "LATEST_RELEASE" with the actual latest release: [![Release](https://jitpack.io/v/JitseB/phantom.svg)](https://jitpack.io/#JitseB/phantom)<br>
 *If you do not use Maven or Gradle, you may download the latest [release](https://github.com/JitseB/phantom/releases) and add it to your build path.*
 
 ### API Example
