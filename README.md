@@ -22,7 +22,7 @@ You can donate by clicking on the PayPal link below.
 You can add a message that will be displayed next to your name below.
 If you do not want your name to be added, or want it to be removed. 
 Either put it in the donation message or send me an [email](mailto:Jitse@fastmail.com).<br><br>
-[![paypal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](paypal.me/JitseB)
+[![paypal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://paypal.me/JitseB)
 
 #### History of donations
 *No donations available*
