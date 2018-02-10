@@ -10,7 +10,7 @@
     <properties>
         <author>JitseB</author>
         <description>The ultimate Minecraft network core.</description>
-        <main.spigot>net.jitse.phantom.spigot.Phantom</main.spigot>
+        <main.spigot>net.jitse.phantom.spigot_old.Phantom</main.spigot>
         <main.bungeecord>net.jitse.phantom.bungeecord.Phantom</main.bungeecord>
     </properties>
 

@@ -1,4 +1,4 @@
-package net.jitse.api.configuration;
+package net.jitse.phantom.spigot.utilities.files;
 
 import net.jitse.phantom.spigot_old.logging.SpigotLogger;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -41,16 +41,14 @@ public class Config extends YamlConfiguration {
                     save();
                 }
             } catch (IOException | InvalidConfigurationException exception) {
-                SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not create config file " + file.getName() + ".");
-                SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
+                SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not create config file " + file.getName() + ". " + exception.getMessage());
             }
         }
 
         try {
             load(file);
         } catch (IOException | InvalidConfigurationException exception) {
-            SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not load config file " + file.getName() + ".");
-            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not load config file " + file.getName() + ". " + exception.getMessage());
         }
     }
 
@@ -59,8 +57,7 @@ public class Config extends YamlConfiguration {
             options().indent(2);
             save(file);
         } catch (IOException exception) {
-            SpigotLogger.log(plugin, SpigotLogger.LogLevel.WARN, "Could not save config file " + file.getName() + ".");
-            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, exception.getMessage());
+            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not save config file " + file.getName() + ". " + exception.getMessage());
         }
     }
 }
