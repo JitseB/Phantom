@@ -2,7 +2,6 @@ package net.jitse.phantom.spigot.utilities.logging;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,8 +11,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.rule.PowerMockRule;
-
-import java.util.Collections;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Bukkit.class})
@@ -30,7 +27,7 @@ public class SpigotLoggerTest {
         this.logger = new SpigotLogger("foo", LogLevel.INFO);
         this.console = PowerMockito.mock(ConsoleCommandSender.class);
         PowerMockito.mockStatic(Bukkit.class);
-        PowerMockito.doReturn(Collections.singleton(PowerMockito.mock(Player.class))).when(Bukkit.getOnlinePlayers());
+//        PowerMockito.doReturn(Collections.singleton(PowerMockito.mock(Player.class))).when(Bukkit.getOnlinePlayers());
     }
 
     @Test
