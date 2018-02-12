@@ -3,15 +3,14 @@ package net.jitse.phantom.spigot.utilities.logging;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpigotLogger {
 
-    private final JavaPlugin plugin;
+    private final String name;
     private final LogLevel max;
 
-    public SpigotLogger(JavaPlugin plugin, LogLevel max) {
-        this.plugin = plugin;
+    public SpigotLogger(String name, LogLevel max) {
+        this.name = name;
         this.max = max;
     }
 
@@ -45,7 +44,7 @@ public class SpigotLogger {
                 break;
         }
 
-        text += ChatColor.GRAY + "[" + plugin.getName() + "] ";
+        text += ChatColor.GRAY + "[" + name + "] ";
 
         Bukkit.getConsoleSender().sendMessage(text + ChatColor.WHITE + message);
 

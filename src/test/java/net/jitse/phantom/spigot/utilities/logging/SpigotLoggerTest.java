@@ -1,44 +1,52 @@
 package net.jitse.phantom.spigot.utilities.logging;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.entity.Player;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 
-import static org.mockito.Mockito.*;
+import java.util.Collections;
+import java.util.logging.Logger;
 
-@RunWith(MockitoJUnitRunner.class)
+@PrepareForTest({Bukkit.class, SpigotLogger.class})
 public class SpigotLoggerTest {
 
+    private final Logger logger = Logger.getLogger("SpigotLoggerTest");
     private final LogLevel max = LogLevel.INFO;
 
-    private JavaPlugin plugin;
-    private SpigotLogger logger;
+    private SpigotLogger spigotLogger;
     private ConsoleCommandSender console;
 
     @Before
     public void setUp() {
-        JavaPlugin plugin = mock(JavaPlugin.class);
-        when(plugin.getName()).thenReturn(anyString());
-        this.logger = new SpigotLogger(plugin, max);
-        this.console = mock(ConsoleCommandSender.class);
-//        Player player = mock(Player.class);
-//        Bukkit bukkit = mock(Bukkit.class);
-//        Collection<? extends Player> collection = Collections.singleton(player);
-//        //when(bukkit.getOnlinePlayers()).thenReturn(collection);
+        logger.info("Testing the SpigotLogger class.");
+        this.spigotLogger = new SpigotLogger("foo", max);
+
+        this.console = Mockito.mock(ConsoleCommandSender.class);
+
+//        PluginManager pm = new ListingPluginManager();
+
+        PowerMockito.mockStatic(Bukkit.class);
+//        Server server = PowerMockito.mock(Server.class)
+//        PowerMockito.doReturn(pm).when(server).getPluginManager();
+//        Mockito.when(Bukkit.getServer()).thenReturn(server);
+
+        PowerMockito.doReturn(Collections.singleton(Mockito.mock(Player.class))).when(Bukkit.getOnlinePlayers());
     }
 
     @Test
-    public void testConsole() {
-        logger.log(LogLevel.FATAL, anyString());
-        verify(console, times(1)).sendMessage(anyString());
+    public void testValid() {
+        spigotLogger.log(LogLevel.FATAL, Mockito.anyString());
+        Mockito.verify(console, Mockito.times(1)).sendMessage(Mockito.anyString());
     }
 
     @Test
     public void testInvalid() {
-        logger.log(LogLevel.DEBUG, anyString());
-        verify(console, never()).sendMessage(anyString());
+        spigotLogger.log(LogLevel.DEBUG, Mockito.anyString());
+        Mockito.verify(console, Mockito.never()).sendMessage(Mockito.anyString());
     }
 }
