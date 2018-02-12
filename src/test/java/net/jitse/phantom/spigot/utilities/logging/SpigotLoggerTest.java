@@ -23,7 +23,7 @@ public class SpigotLoggerTest {
     @Before
     public void setUp() {
         this.logger = new SpigotLogger("foo", LogLevel.INFO);
-        this.console = Mockito.mock(ConsoleCommandSender.class);
+        this.console = PowerMockito.mock(ConsoleCommandSender.class);
         PowerMockito.mockStatic(Bukkit.class);
         PowerMockito.doReturn(Collections.singleton(PowerMockito.mock(Player.class))).when(Bukkit.getOnlinePlayers());
     }
