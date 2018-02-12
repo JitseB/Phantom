@@ -8,28 +8,24 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.rule.PowerMockRule;
 
 import java.util.Collections;
 
-@PrepareForTest({Bukkit.class, SpigotLogger.class, LogLevel.class, Player.class, ConsoleCommandSender.class})
 public class SpigotLoggerTest {
 
     @Rule
     public PowerMockRule rule = new PowerMockRule();
-
-    private final LogLevel max = LogLevel.INFO;
 
     private SpigotLogger logger;
     private ConsoleCommandSender console;
 
     @Before
     public void setUp() {
-        this.logger = new SpigotLogger("foo", max);
+        this.logger = new SpigotLogger("foo", LogLevel.INFO);
         this.console = Mockito.mock(ConsoleCommandSender.class);
         PowerMockito.mockStatic(Bukkit.class);
-        PowerMockito.doReturn(Collections.singleton(Mockito.mock(Player.class))).when(Bukkit.getOnlinePlayers());
+        PowerMockito.doReturn(Collections.singleton(PowerMockito.mock(Player.class))).when(Bukkit.getOnlinePlayers());
     }
 
     @Test
