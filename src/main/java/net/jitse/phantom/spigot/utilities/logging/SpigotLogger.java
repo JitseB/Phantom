@@ -1,13 +1,25 @@
 package net.jitse.phantom.spigot.utilities.logging;
 
-import net.jitse.phantom.spigot_old.Phantom;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class Logger {
+public class SpigotLogger {
 
-    public static void log(Phantom plugin, Logger.LogLevel level, String message) {
+    private final JavaPlugin plugin;
+    private final LogLevel max;
+
+    public SpigotLogger(JavaPlugin plugin, LogLevel max) {
+        this.plugin = plugin;
+        this.max = max;
+    }
+
+    public void log(LogLevel level, String message) {
+        if (level.ordinal() > max.ordinal()) {
+            return;
+        }
+
         String text;
         switch (level) {
             case DEBUG:
@@ -37,16 +49,10 @@ public class Logger {
 
         Bukkit.getConsoleSender().sendMessage(text + ChatColor.WHITE + message);
 
-        if (level == Logger.LogLevel.DEBUG) {
-            return;
-        }
-
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("phantom.logging." + level.toString().toLowerCase())) {
                 player.sendMessage(text + ChatColor.WHITE + message);
             }
         }
     }
-
-    public enum LogLevel {DEBUG, ERROR, FATAL, INFO, WARN, SUCCESS}
 }
