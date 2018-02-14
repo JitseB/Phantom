@@ -1,6 +1,6 @@
 package net.jitse.phantom.spigot.common.commands;
 
-import net.jitse.phantom.spigot_old.Phantom;
+import net.jitse.phantom.spigot.Phantom;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,8 +23,8 @@ public class PluginsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player && !sender.hasPermission("phantom.commands.plugins")) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getMessagesConfig().getString("Command.NoPermission")
-                    .replace("%permission%", "phantom.commands.plugins")));
+//            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getMessagesConfig().getString("Command.NoPermission")
+//                    .replace("%permission%", "phantom.commands.plugins")));
             return true;
         }
 

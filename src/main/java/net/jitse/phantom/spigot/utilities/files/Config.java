@@ -1,6 +1,5 @@
 package net.jitse.phantom.spigot.utilities.files;
 
-import net.jitse.phantom.spigot_old.logging.SpigotLogger;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,44 +19,69 @@ public class Config extends YamlConfiguration {
         this.plugin = plugin;
         this.defaults = defaultsName;
         this.file = new File(plugin.getDataFolder(), fileName);
-        reload();
     }
 
-    public void reload() {
-        if (!file.exists()) {
-            try {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-
-                load(file);
-                if (defaults != null) {
-                    InputStreamReader reader = new InputStreamReader(plugin.getResource(defaults));
-                    FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);
-
-                    setDefaults(defaultsConfig);
-                    options().copyDefaults(true);
-
-                    reader.close();
-                    save();
-                }
-            } catch (IOException | InvalidConfigurationException exception) {
-                SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not create config file " + file.getName() + ". " + exception.getMessage());
-            }
+    /**
+     * Create the configuration file.
+     *
+     * @return Whether the file was created successfully.
+     * Auto returns true if file already exists.
+     */
+    public boolean createIfNotExists() {
+        if (file.exists()) {
+            return true;
         }
 
         try {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+
             load(file);
+            if (defaults != null) {
+                InputStreamReader reader = new InputStreamReader(plugin.getResource(defaults));
+                FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);
+
+                setDefaults(defaultsConfig);
+                options().copyDefaults(true);
+
+                reader.close();
+                save();
+            }
         } catch (IOException | InvalidConfigurationException exception) {
-            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not load config file " + file.getName() + ". " + exception.getMessage());
+            return false;
         }
+
+        return true;
     }
 
-    public void save() {
+    /**
+     * Reload the configuration file.
+     *
+     * @return Whether the file was reloaded successfully.
+     */
+    public boolean reload() {
+        try {
+            load(file);
+        } catch (IOException | InvalidConfigurationException exception) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Save the configuration file.
+     *
+     * @return Whether the file was saved successfully.
+     */
+    public boolean save() {
         try {
             options().indent(2);
             save(file);
         } catch (IOException exception) {
-            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not save config file " + file.getName() + ". " + exception.getMessage());
+            return false;
         }
+
+        return true;
     }
 }

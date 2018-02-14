@@ -1,6 +1,5 @@
 package net.jitse.phantom.spigot.utilities.files;
 
-import net.jitse.phantom.spigot_old.logging.SpigotLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -47,7 +46,6 @@ public class TextFile {
                 exception.printStackTrace();
             }
         } catch (IOException exception) {
-            SpigotLogger.log(plugin, SpigotLogger.LogLevel.ERROR, "Could not create \"" + name + "\" file. " + exception.getMessage());
             return false;
         }
 
