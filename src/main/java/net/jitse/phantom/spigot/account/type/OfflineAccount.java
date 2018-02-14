@@ -2,7 +2,6 @@ package net.jitse.phantom.spigot.account.type;
 
 import net.jitse.phantom.spigot.account.Account;
 import net.jitse.phantom.spigot.account.rank.Rank;
-import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -41,10 +40,5 @@ public class OfflineAccount implements Account {
     @Override
     public boolean isOnline() {
         return false;
-    }
-
-    @Override
-    public Player getPlayer() {
-        return null;
     }
 }
