@@ -5,15 +5,19 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
 import java.io.FileInputStream;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TextFileTest {
 
     private static JavaPlugin plugin;
@@ -28,20 +32,14 @@ public class TextFileTest {
     }
 
     @Test
-    public void testThankYouFile() throws Exception {
-        File mock = new File(getClass().getResource("/thankyou.txt").getPath());
-        when(plugin.getResource("thankyou.txt")).thenReturn(new FileInputStream(mock));
-
-        TextFile textFile = new TextFile(plugin, "thankyou");
-        assertTrue(textFile.createIfNotExists());
-    }
-
-    @Test
-    public void testCopyrightFile() throws Exception {
+    public void testWithCopyrightFile() throws Exception {
         File mock = new File(getClass().getResource("/copyright.txt").getPath());
         when(plugin.getResource("copyright.txt")).thenReturn(new FileInputStream(mock));
 
         TextFile textFile = new TextFile(plugin, "copyright");
-        assertTrue(textFile.createIfNotExists());
+        assertFalse(textFile.exists());
+        assertTrue(textFile.create());
+        assertTrue(new File(folder.getRoot() + "/copyright.txt").exists());
+        assertTrue(textFile.exists());
     }
 }

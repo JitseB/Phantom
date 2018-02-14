@@ -17,13 +17,18 @@ public class TextFile {
         this.file = new File(plugin.getDataFolder(), name + ".txt");
     }
 
+    public boolean exists() {
+        return file.exists();
+    }
+
     /**
      * Creates the text file in the plugin's data folder.
      *
-     * @return Whether the file was created successfully. (Auto returns true if file exists.)
+     * @return Whether the file was created successfully.
+     * Auto returns true if file exists.
      */
-    public boolean createIfNotExists() {
-        if (file.exists()) {
+    public boolean create() {
+        if (exists()) {
             return true;
         }
 

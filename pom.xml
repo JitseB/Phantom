@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.jitse</groupId>
-    <artifactId>Phantom</artifactId>
+    <artifactId>phantom</artifactId>
     <version>0.1.0-dev</version>
+    <name>Phantom</name>
     <properties>
         <author>JitseB</author>
         <description>The ultimate Minecraft network core.</description>
-        <main.spigot>net.jitse.phantom.spigot_old.Phantom</main.spigot>
+        <main.spigot>net.jitse.phantom.spigot.Phantom</main.spigot>
         <main.bungeecord>net.jitse.phantom.bungeecord.Phantom</main.bungeecord>
     </properties>
 
@@ -86,7 +87,6 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>2.13.0</version>
-            <type>jar</type>
             <scope>test</scope>
         </dependency>
     </dependencies>
