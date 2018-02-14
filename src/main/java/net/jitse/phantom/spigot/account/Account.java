@@ -1,7 +1,6 @@
 package net.jitse.phantom.spigot.account;
 
 import net.jitse.phantom.spigot.account.rank.Rank;
-import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -33,9 +32,4 @@ public interface Account {
      * @return Whether the player is online.
      */
     boolean isOnline();
-
-    /**
-     * @return Returns the player (if online, otherwise null).
-     */
-    Player getPlayer();
 }
