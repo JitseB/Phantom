@@ -26,7 +26,7 @@ public class TextFileTest {
     public static TemporaryFolder folder = new TemporaryFolder();
 
     @Before
-    public static void setUpClass() {
+    public void setUpClass() {
         plugin = mock(JavaPlugin.class);
         given(plugin.getDataFolder()).willReturn(folder.getRoot());
     }
