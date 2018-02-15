@@ -13,7 +13,7 @@ public class CommonModuleManager extends Module {
     }
 
     @Override
-    public void register() {
+    public void enable() {
         getPlugin().getCommand("ping").setExecutor(new PingCommand(getPlugin()));
         getPlugin().getCommand("plugins").setExecutor(new PluginsCommand(getPlugin()));
 

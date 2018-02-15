@@ -10,7 +10,7 @@ public class TimeModuleManager extends Module {
     }
 
     @Override
-    public void register() {
+    public void enable() {
 
     }
 }

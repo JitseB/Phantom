@@ -1,18 +1,17 @@
-package net.jitse.phantom.spigot.modules;
+package net.jitse.phantom.listener;
 
 import net.jitse.phantom.spigot.Phantom;
+import org.bukkit.event.Listener;
 
-public abstract class Module {
+public abstract class ListenerBase implements Listener {
 
     private final Phantom plugin;
 
-    public Module(Phantom plugin) {
+    public ListenerBase(Phantom plugin) {
         this.plugin = plugin;
     }
 
     public Phantom getPlugin() {
         return plugin;
     }
-
-    public abstract void enable();
 }

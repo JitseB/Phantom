@@ -10,7 +10,7 @@ public class AuthModuleManager extends Module {
     }
 
     @Override
-    public void register() {
-        
+    public void enable() {
+
     }
 }
