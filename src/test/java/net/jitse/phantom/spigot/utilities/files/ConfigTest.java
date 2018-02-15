@@ -1,7 +1,7 @@
 package net.jitse.phantom.spigot.utilities.files;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -25,7 +25,7 @@ public class ConfigTest {
     @ClassRule
     public static TemporaryFolder folder = new TemporaryFolder();
 
-    @BeforeClass
+    @Before
     public static void setUpClass() {
         plugin = mock(JavaPlugin.class);
         given(plugin.getDataFolder()).willReturn(folder.getRoot());
