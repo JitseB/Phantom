@@ -6,9 +6,9 @@ import net.jitse.phantom.spigot.modules.common.commands.PingCommand;
 import net.jitse.phantom.spigot.modules.common.commands.PluginsCommand;
 import net.jitse.phantom.spigot.modules.common.listeners.PlayerJoinListener;
 
-public class CommonManager extends Module {
+public class CommonModuleManager extends Module {
 
-    public CommonManager(Phantom plugin) {
+    public CommonModuleManager(Phantom plugin) {
         super(plugin);
     }
 
