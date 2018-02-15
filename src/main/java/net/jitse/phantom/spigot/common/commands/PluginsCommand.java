@@ -23,8 +23,9 @@ public class PluginsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player && !sender.hasPermission("phantom.commands.plugins")) {
-//            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getMessagesConfig().getString("Command.NoPermission")
-//                    .replace("%permission%", "phantom.commands.plugins")));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                    plugin.getMessagesConfig().getString("Command.NoPermission")
+                            .replace("%permission%", "phantom.commands.plugins")));
             return true;
         }
 
