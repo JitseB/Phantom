@@ -1,4 +1,4 @@
-package net.jitse.phantom.spigot.common.commands;
+package net.jitse.phantom.spigot.modules.common.commands;
 
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.utilities.logging.LogLevel;

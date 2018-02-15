@@ -1,4 +1,4 @@
-package net.jitse.phantom.spigot.common.listeners;
+package net.jitse.phantom.spigot.modules.common.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
