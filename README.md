@@ -6,6 +6,7 @@ Phantom – The ultimate Minecraft core.<br>
 [![Release](https://jitpack.io/v/JitseB/phantom.svg)](https://github.com/JitseB/phantom/releases) 
 [![Build Status](https://travis-ci.org/JitseB/phantom.svg?branch=master)](https://travis-ci.org/JitseB/phantom)
 [![License](https://img.shields.io/badge/License-Apache%202.0-gray.svg)](https://opensource.org/licenses/Apache-2.0)
+[![JDK](https://img.shields.io/badge/Using-Java%209-red.svg)](http://jdk.java.net/9/)
 =
 Phantom is a high performance Minecraft core that allows servers (and networks) to create a manageable, stable and lag-free
 gaming experience for their players. It also provides seamlessly integrated administrative tools so that it is easier to 

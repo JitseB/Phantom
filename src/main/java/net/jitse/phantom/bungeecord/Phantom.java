@@ -6,6 +6,6 @@ public class Phantom extends Plugin {
 
     @Override
     public void onEnable() {
-        
+        // Todo create bungee plugin :shrug:
     }
 }
