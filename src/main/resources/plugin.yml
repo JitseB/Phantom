@@ -1,4 +1,4 @@
-name: ${project.artifactId}
+name: ${project.name}
 version: ${project.version}
 author: ${author}
 description: ${description}

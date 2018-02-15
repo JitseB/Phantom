@@ -2,6 +2,7 @@ package net.jitse.phantom.spigot.modules.weather;
 
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.modules.Module;
+import net.jitse.phantom.spigot.modules.weather.listeners.WeatherChangeListener;
 import net.jitse.phantom.spigot.utilities.logging.LogLevel;
 import org.bukkit.World;
 
@@ -16,6 +17,12 @@ public class WeatherModuleManager extends Module {
 
     @Override
     public void enable() {
+        lock();
+
+        getPlugin().getServer().getPluginManager().registerEvents(new WeatherChangeListener(getPlugin()), getPlugin());
+    }
+
+    private void lock() {
         Set<String> keys = getPlugin().getSettingsConfig().getConfigurationSection("Modifiers.World.Weather").getKeys(false);
         for (String name : keys) {
             World world = getPlugin().getServer().getWorld(name);

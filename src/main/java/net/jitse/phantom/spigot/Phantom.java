@@ -2,6 +2,7 @@ package net.jitse.phantom.spigot;
 
 import net.jitse.phantom.spigot.account.AccountManager;
 import net.jitse.phantom.spigot.modules.ModuleManager;
+import net.jitse.phantom.spigot.storage.StorageManager;
 import net.jitse.phantom.spigot.utilities.files.Config;
 import net.jitse.phantom.spigot.utilities.logging.LogLevel;
 import net.jitse.phantom.spigot.utilities.logging.SpigotLogger;
@@ -17,16 +18,24 @@ public class Phantom extends JavaPlugin {
 
     // Managers.
     private final AccountManager accountManager = new AccountManager();
+    private final StorageManager storageManager = new StorageManager(this);
     private final ModuleManager moduleManager = new ModuleManager();
 
     // Logging.
     private SpigotLogger spigotLogger;
 
     @Override
+    public void onLoad() {
+        Bukkit.broadcastMessage(ChatColor.BLUE + "Loading Phantom.");
+    }
+
+    @Override
     public void onEnable() {
+        Bukkit.broadcastMessage(ChatColor.BLUE + "Enabling Phantom.");
         if (!setupConfigs(settingsConfig, messagesConfig)) {
             // If failed -> Stop enabling the plugin any further.
             Bukkit.broadcastMessage(ChatColor.RED + "Phantom failed to create all config files.");
+            getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
@@ -34,6 +43,12 @@ public class Phantom extends JavaPlugin {
         spigotLogger = new SpigotLogger("Phantom", LogLevel.DEBUG);
 
         Bukkit.broadcastMessage(ChatColor.GREEN + "Phantom was enabled.");
+    }
+
+    @Override
+    public void onDisable() {
+        Bukkit.broadcastMessage(ChatColor.BLUE + "Disabling Phantom.");
+        Bukkit.broadcastMessage(ChatColor.RED + "Disabled plugin.");
     }
 
     private boolean setupConfigs(Config... configs) {

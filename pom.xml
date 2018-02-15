@@ -8,6 +8,7 @@
     <artifactId>phantom</artifactId>
     <version>0.1.0-dev</version>
     <name>Phantom</name>
+    
     <properties>
         <author>JitseB</author>
         <description>The ultimate Minecraft network core.</description>

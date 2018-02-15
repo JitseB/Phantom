@@ -1,8 +1,8 @@
 package net.jitse.phantom.spigot.modules.weather.listeners;
 
-import net.jitse.phantom.listener.ListenerBase;
 import net.jitse.phantom.spigot.Phantom;
 import net.jitse.phantom.spigot.modules.weather.WeatherType;
+import net.jitse.phantom.spigot.utilities.listener.ListenerBase;
 import net.jitse.phantom.spigot.utilities.logging.LogLevel;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.weather.WeatherChangeEvent;
