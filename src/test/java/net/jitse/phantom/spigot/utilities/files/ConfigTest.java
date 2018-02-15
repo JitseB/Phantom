@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.io.File;
 import java.io.FileInputStream;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -37,7 +38,11 @@ public class ConfigTest {
 
         Config config = new Config(plugin, "foo.yml", "plugin.yml");
         assertTrue(config.createIfNotExists());
-        assertTrue(config.reload());
+        assertTrue(new File(folder.getRoot() + "/foo.yml").exists());
+        assertNotNull(config.getString("name"));
+        config.set("name", "bar");
         assertTrue(config.save());
+        assertTrue(config.reload());
+        assertTrue(config.getString("name").equals("bar"));
     }
 }
