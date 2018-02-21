@@ -8,7 +8,7 @@
     <artifactId>phantom</artifactId>
     <version>0.1.0-dev</version>
     <name>Phantom</name>
-    
+
     <properties>
         <author>JitseB</author>
         <description>The ultimate Minecraft network core.</description>
@@ -32,6 +32,13 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--NMS-->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
             <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
@@ -69,13 +76,6 @@
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
             <version>1.12-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--MySQL Java Connector-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
             <scope>provided</scope>
         </dependency>
         <!--StringUtils-->

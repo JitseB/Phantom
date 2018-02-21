@@ -13,10 +13,11 @@ public class CommonModuleManager extends Module {
     }
 
     @Override
-    public void enable() {
+    public boolean enable() {
         getPlugin().getCommand("ping").setExecutor(new PingCommand(getPlugin()));
         getPlugin().getCommand("plugins").setExecutor(new PluginsCommand(getPlugin()));
 
         getPlugin().getServer().getPluginManager().registerEvents(new PlayerJoinListener(), getPlugin());
+        return true;
     }
 }

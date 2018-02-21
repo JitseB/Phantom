@@ -14,5 +14,10 @@ public abstract class Module {
         return plugin;
     }
 
-    public abstract void enable();
+    /**
+     * Load / Enable the module.
+     *
+     * @return Whether the module was loaded successfully.
+     */
+    public abstract boolean enable();
 }

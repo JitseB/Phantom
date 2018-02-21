@@ -10,7 +10,7 @@ public class AuthModuleManager extends Module {
     }
 
     @Override
-    public void enable() {
-
+    public boolean enable() {
+        return true;
     }
 }

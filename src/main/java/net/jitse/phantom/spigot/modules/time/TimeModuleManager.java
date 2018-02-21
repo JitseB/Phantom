@@ -10,7 +10,7 @@ public class TimeModuleManager extends Module {
     }
 
     @Override
-    public void enable() {
-
+    public boolean enable() {
+        return true;
     }
 }

@@ -16,10 +16,11 @@ public class WeatherModuleManager extends Module {
     }
 
     @Override
-    public void enable() {
+    public boolean enable() {
         lock();
 
         getPlugin().getServer().getPluginManager().registerEvents(new WeatherChangeListener(getPlugin()), getPlugin());
+        return true;
     }
 
     private void lock() {

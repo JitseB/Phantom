@@ -7,50 +7,51 @@ import org.bukkit.entity.Player;
 public class SpigotLogger {
 
     private final String name;
+    private final ChatColor nameColor, messageColor;
     private final LogLevel max;
 
-    public SpigotLogger(String name, LogLevel max) {
+    public SpigotLogger(String name, ChatColor nameColor, ChatColor messageColor, LogLevel max) {
         this.name = name;
+        this.nameColor = nameColor;
+        this.messageColor = messageColor;
         this.max = max;
     }
 
     public void log(LogLevel level, String message) {
-        if (level.ordinal() > max.ordinal()) {
+        if (level.ordinal() < max.ordinal()) {
             return;
         }
 
-        String text;
+        String text = nameColor + "[" + name + "] ";
         switch (level) {
             case DEBUG:
-                text = ChatColor.YELLOW + "[Debug] ";
+                text += ChatColor.YELLOW + "[Debug] ";
                 break;
             case ERROR:
-                text = ChatColor.RED + "[Error] ";
+                text += ChatColor.RED + "[Error] ";
                 break;
             case FATAL:
-                text = ChatColor.DARK_RED + "[Fatal] ";
+                text += ChatColor.RED + "[Fatal] ";
                 break;
             case INFO:
-                text = ChatColor.AQUA + "[Info] ";
+                text += ChatColor.WHITE + "[Info] ";
                 break;
             case WARN:
-                text = ChatColor.GOLD + "[Warn] ";
+                text += ChatColor.GOLD + "[Warn] ";
                 break;
             case SUCCESS:
-                text = ChatColor.GREEN + "[Success] ";
+                text += ChatColor.GREEN + "[Success] ";
                 break;
             default:
-                text = "";
+                text += "";
                 break;
         }
 
-        text += ChatColor.GRAY + "[" + name + "] ";
-
-        Bukkit.getConsoleSender().sendMessage(text + ChatColor.WHITE + message);
+        Bukkit.getConsoleSender().sendMessage(text + messageColor + message);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("phantom.logging." + level.toString().toLowerCase())) {
-                player.sendMessage(text + ChatColor.WHITE + message);
+                player.sendMessage(text + messageColor + message);
             }
         }
     }
