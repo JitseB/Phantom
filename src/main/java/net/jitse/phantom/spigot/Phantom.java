@@ -1,6 +1,7 @@
 package net.jitse.phantom.spigot;
 
 import net.jitse.phantom.spigot.account.AccountManager;
+import net.jitse.phantom.spigot.account.rank.RankManager;
 import net.jitse.phantom.spigot.modules.ModuleManager;
 import net.jitse.phantom.spigot.storage.StorageManager;
 import net.jitse.phantom.spigot.utilities.files.Config;
@@ -14,11 +15,13 @@ public class Phantom extends JavaPlugin {
     // Plugin Configuration.
     private final Config settingsConfig = new Config(this, "settings.yml", "settings.yml");
     private final Config messagesConfig = new Config(this, "messages.yml", "messages.yml");
+    private final Config storageConfig = new Config(this, "storage.yml", "storage.yml");
 
     // Managers.
     private final AccountManager accountManager = new AccountManager(this);
     private final StorageManager storageManager = new StorageManager(this);
     private final ModuleManager moduleManager = new ModuleManager(this);
+    private final RankManager rankManager = new RankManager(this);
 
     // Logging.
     private SpigotLogger spigotLogger;
@@ -31,6 +34,13 @@ public class Phantom extends JavaPlugin {
         if (!setupConfigs(settingsConfig, messagesConfig)) {
             // If failed -> Stop enabling the plugin any further.
             spigotLogger.log(LogLevel.FATAL, "Failed to load all config files.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        if (!storageManager.setup()) {
+            // If failed to set up any storage systems -> Disable Phantom.
+            spigotLogger.log(LogLevel.FATAL, "Failed to set up storage systems.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -89,6 +99,13 @@ public class Phantom extends JavaPlugin {
     }
 
     /**
+     * @return The storage config.
+     */
+    public Config getStorageConfig() {
+        return storageConfig;
+    }
+
+    /**
      * @return The account manager for Phantom.
      */
     public AccountManager getAccountManager() {
@@ -107,5 +124,9 @@ public class Phantom extends JavaPlugin {
      */
     public ModuleManager getModuleManager() {
         return moduleManager;
+    }
+
+    public RankManager getRankManager() {
+        return rankManager;
     }
 }

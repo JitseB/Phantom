@@ -1,11 +1,9 @@
 # Storage configuration:
 
-# Storage types: MYSQL, HIKARI, SQLITE.
-# Difference between MySql and Hikari is that
-# Hikari uses a faster connection pooling system
-# meanwhile MySql uses the default mysql connector.
-# HikariCP is the type I most recommend to use.
-Type: "HIKARI"
+# Storage types:
+# - HIKARICP (connection pool based).
+# - SQLITE (file based).
+Type: "HIKARICP"
 
 # Login information not required for Sqlite.
 Login:

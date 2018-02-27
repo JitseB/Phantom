@@ -6,7 +6,7 @@ public abstract class Module {
 
     private final Phantom plugin;
 
-    public Module(Phantom plugin) {
+    protected Module(Phantom plugin) {
         this.plugin = plugin;
     }
 

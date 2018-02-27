@@ -32,4 +32,9 @@ public interface Account {
      * @return Whether the player is online.
      */
     boolean isOnline();
+
+    /**
+     * @return A cloned object of the account.
+     */
+    Account clone();
 }
