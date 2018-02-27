@@ -7,6 +7,7 @@ import net.jitse.phantom.spigot.storage.StorageManager;
 import net.jitse.phantom.spigot.utilities.files.Config;
 import net.jitse.phantom.spigot.utilities.logging.LogLevel;
 import net.jitse.phantom.spigot.utilities.logging.SpigotLogger;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,6 +32,7 @@ public class Phantom extends JavaPlugin {
         // Todo add config option for max log level (settings.yml).
         spigotLogger = new SpigotLogger("Phantom", ChatColor.WHITE, ChatColor.GRAY, LogLevel.DEBUG);
 
+        // Load the configuration files.
         if (!setupConfigs(settingsConfig, messagesConfig)) {
             // If failed -> Stop enabling the plugin any further.
             spigotLogger.log(LogLevel.FATAL, "Failed to load all config files.");
@@ -38,19 +40,34 @@ public class Phantom extends JavaPlugin {
             return;
         }
 
+        // Set up all storage systems.
         if (!storageManager.setup()) {
-            // If failed to set up any storage systems -> Disable Phantom.
+            // If failed -> Stop enabling the plugin any further.
             spigotLogger.log(LogLevel.FATAL, "Failed to set up storage systems.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
+        // Load all (internal) modules.
         if (!moduleManager.loadAllModules()) {
             // If failed -> Stop enabling the plugin any further.
             spigotLogger.log(LogLevel.FATAL, "Failed to load all internal modules.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        // Now everything is loaded and we can start creating all prerequisites for the storage systems.
+        // Of course we're running this async as they mostly involve IO operations.
+        // Todo create server join states (OPEN, MAINTENANCE, BOOTING) for a minor update.
+        Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
+            if (!storageManager.testSystems()) {
+                // If failed -> Disable Phantom.
+            }
+
+            if (!storageManager.createPrerequisites()) {
+                // If failed -> Disable Phantom.
+            }
+        });
 
         spigotLogger.log(LogLevel.SUCCESS, "Enabled plugin.");
     }
